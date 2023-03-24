@@ -27,8 +27,8 @@ export const airPollutionApi = createApi({
         params: {
           serviceKey: `${import.meta.env.VITE_AIR_POLLUTION_API_KEY}`,
           returnType: 'json',
-          numOfRows: 100,
-          pageNo: 1,
+          numOfRows: params.numOfRows,
+          pageNo: params.pageNo,
           addr: params.addr,
           // stationName: params.stationName,
           ver: '1.0',

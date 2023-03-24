@@ -4,7 +4,7 @@ import { useGetStationNameQuery } from '../../redux/features/airPollution';
 
 const { kakao } = window;
 
-function DisplayDataOnMap({ stationData, stationFetching, stationErr }) {
+function DisplayDataOnMap({ APData, stationData, stationFetching, stationErr }) {
   // const {
   //   data: stationData,
   //   error: stationErr,
@@ -19,8 +19,9 @@ function DisplayDataOnMap({ stationData, stationFetching, stationErr }) {
   //     body: { items },
   //   },
   // } = stationData;
-  const items = stationData?.response?.body?.items;
-  console.log('items', items);
+  const stationDataItems = stationData?.response?.body?.items;
+  const APitems = APData?.response?.body?.items;
+  // console.log('items', items);
 
   useEffect(() => {
     mapscript();
@@ -56,7 +57,7 @@ function DisplayDataOnMap({ stationData, stationFetching, stationErr }) {
   const mapscript = () => {
     const container = document.getElementById('map');
     const options = {
-      center: new kakao.maps.LatLng(items[0].dmX, items[0].dmY),
+      center: new kakao.maps.LatLng(stationDataItems[0].dmX, stationDataItems[0].dmY),
       level: 8,
     };
 
@@ -64,10 +65,10 @@ function DisplayDataOnMap({ stationData, stationFetching, stationErr }) {
     const map = new kakao.maps.Map(container, options);
     setMapInstance(map);
 
-    items.forEach((item) => {
+    stationDataItems.forEach((station) => {
       var content =
         '<div class="overlaybox">' +
-        `    <div class="boxtitle">${item.stationName}</div>` +
+        `    <div class="boxtitle">${station.stationName}</div>` +
         '    <div class="first">' +
         '        <div class="triangle text">1</div>' +
         '    </div>' +
@@ -77,7 +78,7 @@ function DisplayDataOnMap({ stationData, stationFetching, stationErr }) {
         //마커가 표시 될 지도
         map: map,
         //마커가 표시 될 위치
-        position: new kakao.maps.LatLng(item.dmX, item.dmY),
+        position: new kakao.maps.LatLng(station.dmX, station.dmY),
         content: content,
         // image: markerImage,
         xAnchor: 0.3,
