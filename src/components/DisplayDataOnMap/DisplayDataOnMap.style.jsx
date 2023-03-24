@@ -28,62 +28,33 @@ export const MapContainer = styled.div`
   }
 
   .overlaybox {
-    position: relative;
-
+    /* position: relative; */
     width: 80px;
     height: 80px;
     padding: 15px 10px;
     border-radius: 50%;
     background-color: #fff;
     opacity: 0.8;
-  }
-  .overlaybox div,
-  ul {
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-  }
-  .overlaybox li {
-    list-style: none;
-  }
-  .overlaybox .boxtitle {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: var(--primary);
-    font-size: 16px;
-    font-weight: bold;
 
-    margin-bottom: 8px;
-  }
-  .overlaybox .first {
-    position: relative;
-    width: 247px;
-    height: 136px;
+    --secondary-red: #e75b3f;
+    --secondary-yellow: #f5b853;
+    --secondary-cyan: #4eaaba;
 
-    margin-bottom: 8px;
-  }
-  .first .text {
-    color: #fff;
-    font-weight: bold;
-  }
-  .first .triangle {
-    position: absolute;
-    width: 48px;
-    height: 48px;
-    top: 0;
-    left: 0;
+    & .boxtitle {
+      color: var(--primary);
+      font-size: 16px;
+      font-weight: bold;
 
-    padding: 6px;
-    font-size: 18px;
-  }
-  .first .movietitle {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 7px 15px;
-    font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    & .boxsubtitle {
+      color: var(--secondary-red);
+    }
   }
 `;
 

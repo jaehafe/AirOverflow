@@ -50,8 +50,6 @@ function DisplayDataOnMap({ APData, stationData, stationFetching, stationErr }) 
 
   /////////////////////////////////////////
 
-  console.log('stationData', stationData);
-
   useEffect(() => {
     mapscript();
   }, []);
@@ -86,7 +84,7 @@ function DisplayDataOnMap({ APData, stationData, stationFetching, stationErr }) 
   const mapscript = () => {
     const container = document.getElementById('map');
     const options = {
-      center: new kakao.maps.LatLng(stationDataItems[0].dmX, stationDataItems[0].dmY),
+      center: new kakao.maps.LatLng(mergedData[0].dmX, mergedData[0].dmY),
       level: 8,
     };
 
@@ -94,20 +92,31 @@ function DisplayDataOnMap({ APData, stationData, stationFetching, stationErr }) 
     const map = new kakao.maps.Map(container, options);
     setMapInstance(map);
 
-    stationDataItems.forEach((station) => {
-      var content =
+    const colorByPM10Value = (value) => {
+      if (value <= 30) {
+        return '좋음';
+      } else if (31 <= value || value <= 81) {
+        return '보통';
+      } else if (81 <= value || value <= 150) {
+        return '나쁨';
+      } else {
+        return '매우 나쁨';
+      }
+    };
+
+    mergedData.forEach((data) => {
+      const content =
         '<div class="overlaybox">' +
-        `    <div class="boxtitle">${station.stationName}</div>` +
-        '    <div class="first">' +
-        '        <div class="triangle text">1</div>' +
-        '    </div>' +
+        `    <div class="boxtitle">${data.stationName}</div>` +
+        `    <div class="boxsubtitle">${data.pm10Value}</div>` +
+        `    <div class="boxsubtitle">${colorByPM10Value(data.pm10Value)}</div>` +
         '</div>';
 
       const customOverlay = new kakao.maps.CustomOverlay({
         //마커가 표시 될 지도
         map: map,
         //마커가 표시 될 위치
-        position: new kakao.maps.LatLng(station.dmX, station.dmY),
+        position: new kakao.maps.LatLng(data.dmX, data.dmY),
         content: content,
         // image: markerImage,
         xAnchor: 0.3,
