@@ -55,6 +55,12 @@ export const AsideMenuSubtitle = styled.h2`
   padding: 7px 20px;
   color: #38383a;
   font-size: 16px;
+  cursor: pointer;
+
+  &:hover,
+  &:active {
+    color: var(--primary);
+  }
 `;
 export const StyledAiOutlineHome = styled(AiOutlineHome)`
   margin-left: 6px;

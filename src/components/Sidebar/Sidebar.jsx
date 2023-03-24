@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import * as S from './Sidebar.style';
 
-function index() {
+function Sidebar() {
   return (
     <S.Container>
       <S.AsideLogo>
@@ -24,8 +24,16 @@ function index() {
           <S.StyledAiOutlineHome />
         </S.AsideMenuSubtitle>
       </S.AsideMenu>
+      <S.AsideMenu>
+        <S.AsideMenuTitle>커리어 카드</S.AsideMenuTitle>
+        <S.AsideMenuSubtitle>나의 커리어 카드</S.AsideMenuSubtitle>
+        <S.AsideMenuSubtitle>
+          IT 스킬 체크업
+          <S.StyledAiOutlineHome />
+        </S.AsideMenuSubtitle>
+      </S.AsideMenu>
     </S.Container>
   );
 }
 
-export default index;
+export default Sidebar;
