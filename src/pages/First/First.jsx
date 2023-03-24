@@ -4,6 +4,7 @@ import {
   useGetAirPollutionQuery,
   useGetStationNameQuery,
 } from '../../redux/features/airPollution';
+import * as S from './First.style';
 
 function First() {
   const {
@@ -45,14 +46,15 @@ function First() {
   /////////////////////////////////////////
 
   return (
-    <div>
+    <S.Container>
+      <S.Header>123123123123123123123123123</S.Header>
       <DisplayDataOnMap
         APData={APData}
         stationData={stationData}
         stationErr={stationErr}
         stationFetching={stationFetching}
       />
-    </div>
+    </S.Container>
   );
 }
 
