@@ -1,8 +1,8 @@
 import React from 'react';
 import * as S from './Home.style';
 
-function Home() {
-  return <S.Container>Home</S.Container>;
+function Home({ children }) {
+  return <S.Container>{children}</S.Container>;
 }
 
 export default Home;

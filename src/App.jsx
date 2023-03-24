@@ -4,6 +4,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import Sidebar from './components/Sidebar/Sidebar';
 import Home from './pages/Home/Home';
 import Second from './pages/Second/Second';
+import Third from './pages/Third/Third';
 
 const SidebarLayout = () => {
   return (
@@ -13,12 +14,26 @@ const SidebarLayout = () => {
     </S.Wrapper>
   );
 };
+const HomeLayout = () => {
+  return (
+    <Home>
+      <Outlet />
+    </Home>
+  );
+};
 const router = createBrowserRouter([
   {
     path: '/',
     element: <SidebarLayout />,
     children: [
-      { path: '/', element: <Home />, children: [{ path: '/', element: <Second /> }] },
+      {
+        path: '/',
+        element: <HomeLayout />,
+        children: [
+          { path: '/second', element: <Second /> },
+          { path: '/third', element: <Third /> },
+        ],
+      },
     ],
   },
 ]);
