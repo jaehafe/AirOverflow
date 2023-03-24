@@ -7,10 +7,6 @@ function Second() {
     sidoName: '서울',
   });
 
-  if (isLoading) {
-    return <div>isLoading ...</div>;
-  }
-
   if (isFetching) {
     return <div>isFetching ...</div>;
   }
@@ -18,6 +14,7 @@ function Second() {
   if (error) {
     return <div>{error.message}</div>;
   }
+
   console.log('data', data);
   return <div>123</div>;
 }
