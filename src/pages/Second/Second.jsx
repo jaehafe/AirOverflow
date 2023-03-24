@@ -1,21 +1,35 @@
 import React from 'react';
-import { useGetAirPollutionQuery } from '../../redux/features/airPollution';
+import {
+  useGetAirPollutionQuery,
+  useGetStationNameQuery,
+} from '../../redux/features/airPollution';
+// import { useGetAirStationQuery } from '../../redux/features/airStationSlice';
 import * as S from './Second.style';
 
 function Second() {
-  const { data, error, isFetching, isLoading } = useGetAirPollutionQuery({
-    sidoName: '서울',
-  });
+  // const { data, error, isFetching, isLoading } = useGetAirPollutionQuery({
+  //   pageNo: 1,
+  //   sidoName: '전국',
+  //   numOfRows: 10,
+  // });
 
-  if (isFetching) {
-    return <div>isFetching ...</div>;
-  }
+  const {
+    data: stationData,
+    error: stationErr,
+    isFetching: stationFetching,
+    isLoading: stationLoading,
+  } = useGetStationNameQuery({ addr: '서울', stationName: '종로구' });
 
-  if (error) {
-    return <div>{error.message}</div>;
-  }
+  // if (isFetching) {
+  //   return <div>isFetching ...</div>;
+  // }
 
-  console.log('data', data);
+  // if (error) {
+  //   return <div>{error.message}</div>;
+  // }
+
+  // console.log('data', data);
+  console.log('stationData', stationData);
   return <div>123</div>;
 }
 

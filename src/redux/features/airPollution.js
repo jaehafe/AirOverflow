@@ -8,14 +8,29 @@ export const airPollutionApi = createApi({
   }),
   endpoints: (builder) => ({
     getAirPollution: builder.query({
-      query: ({ sidoName }) => ({
-        url: '/getCtprvnRltmMesureDnsty',
+      query: (params) => ({
+        url: '/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty',
+        params: {
+          serviceKey: `${import.meta.env.VITE_AIR_POLLUTION_API_KEY}`,
+          returnType: 'json',
+          numOfRows: params.numOfRows,
+          pageNo: params.pageNo,
+          sidoName: params.sidoName,
+          ver: '1.0',
+        },
+      }),
+    }),
+
+    getStationName: builder.query({
+      query: (params) => ({
+        url: '/MsrstnInfoInqireSvc/getMsrstnList',
         params: {
           serviceKey: `${import.meta.env.VITE_AIR_POLLUTION_API_KEY}`,
           returnType: 'json',
           numOfRows: 100,
           pageNo: 1,
-          sidoName,
+          addr: params.addr,
+          stationName: params.stationName,
           ver: '1.0',
         },
       }),
@@ -23,4 +38,4 @@ export const airPollutionApi = createApi({
   }),
 });
 
-export const { useGetAirPollutionQuery } = airPollutionApi;
+export const { useGetAirPollutionQuery, useGetStationNameQuery } = airPollutionApi;
