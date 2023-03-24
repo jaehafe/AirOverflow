@@ -5,7 +5,7 @@ import * as S from './Sidebar.style';
 function Sidebar() {
   const navigate = useNavigate();
   const handleNavigateToSearch = () => {
-    navigate('/third');
+    navigate('/first');
   };
   return (
     <S.Container>
@@ -33,9 +33,19 @@ function Sidebar() {
       </S.AsideMenu>
       {/*  */}
       <S.AsideMenu>
-        <S.AsideMenuTitle>커리어 카드</S.AsideMenuTitle>
+        <S.AsideMenuTitle>미세먼지 검색2</S.AsideMenuTitle>
         <S.AsideMenuSubtitle onClick={() => navigate('/second')}>
           미세먼지 sec
+        </S.AsideMenuSubtitle>
+        {/* <S.AsideMenuSubtitle>
+          IT 스킬 체크업
+          <S.StyledAiOutlineHome />
+        </S.AsideMenuSubtitle> */}
+      </S.AsideMenu>
+      <S.AsideMenu>
+        <S.AsideMenuTitle>미세먼지 검색3</S.AsideMenuTitle>
+        <S.AsideMenuSubtitle onClick={() => navigate('/third')}>
+          미세먼지 trd
         </S.AsideMenuSubtitle>
         {/* <S.AsideMenuSubtitle>
           IT 스킬 체크업

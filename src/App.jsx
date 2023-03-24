@@ -4,6 +4,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import Sidebar from './components/Sidebar/Sidebar';
 import Home from './pages/Home/Home';
 import Second from './pages/Second/Second';
+import First from './pages/First/First';
 import Third from './pages/Third/Third';
 
 const SidebarLayout = () => {
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
         path: '/',
         element: <HomeLayout />,
         children: [
+          { path: '/first', element: <First /> },
           { path: '/second', element: <Second /> },
           { path: '/third', element: <Third /> },
         ],
