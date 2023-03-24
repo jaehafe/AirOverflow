@@ -18,8 +18,10 @@ function Second() {
     error: stationErr,
     isFetching: stationFetching,
     isLoading: stationLoading,
-  } = useGetStationNameQuery({ addr: '서울', stationName: '종로구' });
+  } = useGetStationNameQuery({ addr: '서울' });
+  // , stationName: '종로구' }
 
+  const items = stationData?.response?.body?.items;
   // if (isFetching) {
   //   return <div>isFetching ...</div>;
   // }
@@ -29,7 +31,7 @@ function Second() {
   // }
 
   // console.log('data', data);
-  console.log('stationData', stationData);
+  console.log('stationData', items);
   return <div>123</div>;
 }
 

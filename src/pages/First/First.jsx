@@ -1,20 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import * as S from './First.style';
-
-const { kakao } = window;
-// Lat;
+import React from 'react';
+import DisplayDataOnMap from '../../components/DisplayDataOnMap/DisplayDataOnMap';
+import { useGetStationNameQuery } from '../../redux/features/airPollution';
 
 function First() {
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [error, setError] = useState(null);
-  const [mapInstance, setMapInstance] = useState(null);
+  const {
+    data: stationData,
+    error: stationErr,
+    isFetching: stationFetching,
+    isLoading: stationLoading,
+  } = useGetStationNameQuery({ addr: '서울' });
+
+  // const items = stationData?.response?.body?.items;
+  // console.log('items', items);
+
+  if (stationFetching) {
+    return <div>isFetching ...</div>;
+  }
+
+  if (stationErr) {
+    return <div>{stationErr.message}</div>;
+  }
 
   return (
     <div>
-      <S.MapContainer id="map"></S.MapContainer>
-      <S.CurrentLocationButton>
-        <S.StyledBiCurrentLocation />
-      </S.CurrentLocationButton>
+      123
+      <DisplayDataOnMap
+        stationData={stationData}
+        stationErr={stationErr}
+        stationFetching={stationFetching}
+      />
     </div>
   );
 }
