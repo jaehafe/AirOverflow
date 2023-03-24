@@ -27,15 +27,22 @@ function First() {
   // const items = stationData?.response?.body?.items;
   // console.log('items', items);
 
-  if (stationFetching) {
+  if (stationLoading || APIsLoading || stationFetching || APIsFetching) {
     return <div>isFetching ...</div>;
   }
 
   if (stationErr) {
     return <div>{stationErr.message}</div>;
   }
-  // console.log('APData', APData);
-  // console.log('stationData', stationData);
+
+  const stationDataItems = stationData?.response?.body?.items;
+  const APitems = APData?.response?.body?.items;
+
+  if (!stationDataItems || !APitems) {
+    return <div>Data is not ready</div>;
+  }
+
+  /////////////////////////////////////////
 
   return (
     <div>

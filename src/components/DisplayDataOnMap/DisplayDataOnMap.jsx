@@ -19,9 +19,38 @@ function DisplayDataOnMap({ APData, stationData, stationFetching, stationErr }) 
   //     body: { items },
   //   },
   // } = stationData;
+
   const stationDataItems = stationData?.response?.body?.items;
   const APitems = APData?.response?.body?.items;
-  // console.log('items', items);
+
+  // /////////////////////////////////////////
+  function mergeData(stationDataItems, APitems) {
+    const mergedData = stationDataItems?.reduce((acc, stationItem) => {
+      const foundAPitem = APitems?.find(
+        (APitem) => APitem.stationName === stationItem.stationName
+      );
+
+      if (foundAPitem) {
+        acc.push({
+          stationName: stationItem.stationName,
+          pm10Value: foundAPitem.pm10Value,
+          dmX: stationItem.dmX,
+          dmY: stationItem.dmY,
+        });
+      }
+
+      return acc;
+    }, []);
+
+    return mergedData;
+  }
+
+  const mergedData = mergeData(stationDataItems, APitems);
+  console.log('mergedData', mergedData);
+
+  /////////////////////////////////////////
+
+  console.log('stationData', stationData);
 
   useEffect(() => {
     mapscript();

@@ -30,8 +30,8 @@ export const MapContainer = styled.div`
   .overlaybox {
     position: relative;
 
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     padding: 15px 10px;
     border-radius: 50%;
     background-color: #fff;
