@@ -26,6 +26,65 @@ export const MapContainer = styled.div`
     border-radius: 4px;
     padding: 0px 10px;
   }
+
+  .overlaybox {
+    position: relative;
+
+    width: 100px;
+    height: 100px;
+    padding: 15px 10px;
+    border-radius: 50%;
+    background-color: #fff;
+    opacity: 0.8;
+  }
+  .overlaybox div,
+  ul {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+  }
+  .overlaybox li {
+    list-style: none;
+  }
+  .overlaybox .boxtitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary);
+    font-size: 16px;
+    font-weight: bold;
+
+    margin-bottom: 8px;
+  }
+  .overlaybox .first {
+    position: relative;
+    width: 247px;
+    height: 136px;
+
+    margin-bottom: 8px;
+  }
+  .first .text {
+    color: #fff;
+    font-weight: bold;
+  }
+  .first .triangle {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    top: 0;
+    left: 0;
+
+    padding: 6px;
+    font-size: 18px;
+  }
+  .first .movietitle {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 7px 15px;
+    font-size: 14px;
+  }
 `;
 
 export const CurrentLocationButton = styled.button`

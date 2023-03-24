@@ -26,6 +26,7 @@ function DisplayDataOnMap({ stationData, stationFetching, stationErr }) {
     mapscript();
   }, []);
 
+  // marker 표시
   function displayMarker(locPosition, message) {
     if (!mapInstance) return;
 
@@ -51,6 +52,7 @@ function DisplayDataOnMap({ stationData, stationFetching, stationErr }) {
     mapInstance.setCenter(locPosition);
   }
 
+  // 맵 그려주는 함수
   const mapscript = () => {
     const container = document.getElementById('map');
     const options = {
@@ -62,56 +64,28 @@ function DisplayDataOnMap({ stationData, stationFetching, stationErr }) {
     const map = new kakao.maps.Map(container, options);
     setMapInstance(map);
 
-    // const imageSrc =
-    //   'https://play-lh.googleusercontent.com/PmY6TGbSTUBZkEZRQp5_h2IRw87KXL9iZoQ_FiZW0ve4U5ppt2ArK0PMKMy1X3LHVA=w480-h960-rw';
-    // const imageSize = new kakao.maps.Size(40, 40); // 마커이미지의 크기입니다
-    // const imageOption = { offset: new kakao.maps.Point(27, 69) }; //
-    // const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-
     items.forEach((item) => {
-      // 마커를 생성합니다
-      const marker = new kakao.maps.Marker({
+      var content =
+        '<div class="overlaybox">' +
+        `    <div class="boxtitle">${item.stationName}</div>` +
+        '    <div class="first">' +
+        '        <div class="triangle text">1</div>' +
+        '    </div>' +
+        '</div>';
+
+      const customOverlay = new kakao.maps.CustomOverlay({
         //마커가 표시 될 지도
         map: map,
         //마커가 표시 될 위치
         position: new kakao.maps.LatLng(item.dmX, item.dmY),
+        content: content,
         // image: markerImage,
+        xAnchor: 0.3,
+        yAnchor: 0.91,
       });
 
-      const Content = `<div style="padding:5px;">${item.stationName} 측량소 <br><a href="https://map.kakao.com/link/map/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">길찾기</a></div>`;
-      // 마커에 표시할 인포윈도우를 생성합니다
-      const infowindow = new kakao.maps.InfoWindow({
-        content: Content,
-        // content: `${item.stationName} 측량소`, // 인포윈도우에 표시할 내용
-      });
-
-      // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-      // 이벤트 리스너로는 클로저를 만들어 등록합니다
-      // 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-      // kakao.maps.event.addListener(
-      //   marker,
-      //   'mouseover',
-      //   makeOverListener(map, marker, infowindow)
-      // );
-      // kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-
-      // infowindow.open(map);
-      infowindow.open(map, marker);
-      marker.setMap(map);
+      customOverlay.setMap(map);
     });
-    // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
-    function makeOverListener(map, marker, infowindow) {
-      return function () {
-        infowindow.open(map, marker);
-      };
-    }
-
-    // 인포윈도우를 닫는 클로저를 만드는 함수입니다
-    function makeOutListener(infowindow) {
-      return function () {
-        infowindow.close();
-      };
-    }
   };
 
   const getCurrentPositionAsync = () => {
