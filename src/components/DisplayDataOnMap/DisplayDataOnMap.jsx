@@ -77,21 +77,26 @@ function DisplayDataOnMap({ stationData, stationFetching, stationErr }) {
         position: new kakao.maps.LatLng(item.dmX, item.dmY),
         // image: markerImage,
       });
+
+      const Content = `<div style="padding:5px;">${item.stationName} 측량소 <br><a href="https://map.kakao.com/link/map/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">길찾기</a></div>`;
       // 마커에 표시할 인포윈도우를 생성합니다
       const infowindow = new kakao.maps.InfoWindow({
-        content: `${item.stationName} 측량소`, // 인포윈도우에 표시할 내용
+        content: Content,
+        // content: `${item.stationName} 측량소`, // 인포윈도우에 표시할 내용
       });
 
       // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
       // 이벤트 리스너로는 클로저를 만들어 등록합니다
       // 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-      kakao.maps.event.addListener(
-        marker,
-        'mouseover',
-        makeOverListener(map, marker, infowindow)
-      );
-      kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+      // kakao.maps.event.addListener(
+      //   marker,
+      //   'mouseover',
+      //   makeOverListener(map, marker, infowindow)
+      // );
+      // kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 
+      // infowindow.open(map);
+      infowindow.open(map, marker);
       marker.setMap(map);
     });
     // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
@@ -119,14 +124,15 @@ function DisplayDataOnMap({ stationData, stationFetching, stationErr }) {
   };
 
   const getCurrentLocation = async () => {
-    setIsLoading(true);
+    // setIsLoading(true);
     try {
       const position = await getCurrentPositionAsync();
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
 
       const locPosition = new kakao.maps.LatLng(lat, lon);
-      const message = '<div style="padding:5px;">여기에 계신가요?!</div>';
+      const message = '<div class="info-title">여기에 계신가요?!</div>';
+
       displayMarker(locPosition, message);
     } catch (err) {
       console.log(err);

@@ -23,7 +23,6 @@ function First() {
 
   return (
     <div>
-      123
       <DisplayDataOnMap
         stationData={stationData}
         stationErr={stationErr}
