@@ -1,14 +1,33 @@
 import React from 'react';
+import * as S from './App.style';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
-import InitPage from './pages/InitPage/InitPage';
+import Sidebar from './components/Sidebar/Sidebar';
+import Home from './pages/Home/Home';
+import Second from './pages/Second/Second';
 
-const router = createBrowserRouter([{ path: '/', element: <InitPage /> }]);
+const SidebarLayout = () => {
+  return (
+    <S.Wrapper>
+      <Sidebar />
+      <Outlet />
+    </S.Wrapper>
+  );
+};
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <SidebarLayout />,
+    children: [
+      { path: '/', element: <Home />, children: [{ path: '/', element: <Second /> }] },
+    ],
+  },
+]);
 
 function App() {
   return (
-    <div>
+    <S.Container>
       <RouterProvider router={router} />
-    </div>
+    </S.Container>
   );
 }
 

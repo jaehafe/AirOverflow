@@ -23,8 +23,8 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    border: 1px solid;
-    width: 390px;
+    background-color: var(--background-color);
+    
     margin: auto;
   }
 
@@ -36,14 +36,31 @@ export const GlobalStyles = createGlobalStyle`
 
   * {
   /* font: inherit; */
-  font-family: "GmarketSansLight", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-  --main-color: #F965A3;
+  font-family: "GmarketSansMedium", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  
   --box-shadow: 0 0 0 1px rgb(0 0 0 / 7%), 0 2px 4px rgb(0 0 0 / 5%),
     0 12px 24px rgb(0 0 0 / 5%);
   --division: rgb(239, 224, 224);
-  --subtitle-color: rgb(174, 153, 153);
-  --button-color: rgba(233, 173, 182, 0.8);
-  --background-color: #FAE3EB;
+  --aside-menu-title: #acacae;
+  --off-white: #f7f6f3;
+  --primary: #524D90;
+  --primary-alt: #A79FCB;
+  --primary-alt-40: rgba(167, 159, 203, 0.4);
+  --secondary-red: #E75B3F;
+  --secondary-yellow: #F5B853;
+  --secondary-cyan: #4EAABA;
+  --category-sky: #6ED5EB;
+  --category-cyan: #4CB8B8;
+  --category-mint: #94D3CC;
+  --category-blue: #4CA1DE;
+  --category-pink: #D092E2;
+  --category-purple: #817DCE;
+  --category-navy: #4A6CC3;
+  --category-green: #B9D58C;
+  --category-yellow: #E6D267;
+  --category-orange: #E2B765;
+
+  --background-color: #E9EAED;
   }
   
   *,
