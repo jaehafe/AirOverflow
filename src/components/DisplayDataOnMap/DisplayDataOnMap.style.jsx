@@ -40,9 +40,9 @@ export const MapContainer = styled.div`
     justify-content: center;
     align-items: center;
 
-    --secondary-red: #e75b3f;
+    /* --secondary-red: #e75b3f;
     --secondary-yellow: #f5b853;
-    --secondary-cyan: #4eaaba;
+    --secondary-cyan: #4eaaba; */
 
     & .boxtitle {
       color: var(--primary);
@@ -53,7 +53,7 @@ export const MapContainer = styled.div`
     }
 
     & .boxsubtitle {
-      color: var(--secondary-red);
+      color: #fff;
     }
   }
 `;

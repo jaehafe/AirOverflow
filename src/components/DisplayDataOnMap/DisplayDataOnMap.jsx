@@ -94,23 +94,26 @@ function DisplayDataOnMap({ APData, stationData, stationFetching, stationErr }) 
 
     const colorByPM10Value = (value) => {
       if (value <= 30) {
-        return '좋음';
-      } else if (31 <= value || value <= 81) {
-        return '보통';
-      } else if (81 <= value || value <= 150) {
-        return '나쁨';
+        return { label: '좋음', color: '#32a852' }; // 색상을 원하는 값으로 변경하세요.
+      } else if (31 <= value && value <= 80) {
+        return { label: '보통', color: '#f5b853' };
+      } else if (81 <= value && value <= 150) {
+        return { label: '나쁨', color: '#e75b3f' };
       } else {
-        return '매우 나쁨';
+        return { label: '매우 나쁨', color: '#c0392b' };
       }
     };
 
     mergedData.forEach((data) => {
-      const content =
-        '<div class="overlaybox">' +
-        `    <div class="boxtitle">${data.stationName}</div>` +
-        `    <div class="boxsubtitle">${data.pm10Value}</div>` +
-        `    <div class="boxsubtitle">${colorByPM10Value(data.pm10Value)}</div>` +
-        '</div>';
+      const content = `
+        <div class="overlaybox" style="background-color:${
+          colorByPM10Value(data.pm10Value).color
+        }">
+          <div class="boxtitle">${data.stationName}</div>
+          <div class="boxsubtitle">${data.pm10Value}</div>
+          <div class="boxsubtitle">${colorByPM10Value(data.pm10Value).label}</div>
+        </div>
+      `;
 
       const customOverlay = new kakao.maps.CustomOverlay({
         //마커가 표시 될 지도
