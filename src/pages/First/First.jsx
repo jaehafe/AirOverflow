@@ -73,6 +73,16 @@ function First() {
     );
   };
 
+  const handleStationName = (selectedOption) => {
+    console.log(selectedOption);
+    dispatch(
+      setSidoName({
+        ...activeSido,
+        stationName: selectedOption,
+      })
+    );
+  };
+
   return (
     <S.Container>
       {/* select */}
@@ -90,6 +100,8 @@ function First() {
           />
           <S.StationNameSelect
             placeholder="지역 선택"
+            value={activeSido.stationName}
+            onChange={handleStationName}
             options={sidoStationName.map((station) => ({
               label: station,
               value: station,
