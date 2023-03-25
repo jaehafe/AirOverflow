@@ -60,7 +60,9 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
 `;
-export const KakaoLogo = styled.img``;
+export const KakaoLogo = styled.img`
+  cursor: pointer;
+`;
 export const Message = styled.h4`
   display: flex;
   justify-content: center;

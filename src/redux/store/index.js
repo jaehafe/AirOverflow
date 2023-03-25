@@ -4,10 +4,12 @@ import { airPollutionApi } from '../features/airPollution';
 import { starredApi } from '../features/starred';
 
 import sidoReducer from '../features/sidoSlice';
+import userReducer from '../features/userSlice';
 
 const store = configureStore({
   reducer: {
     sido: sidoReducer,
+    userInfo: userReducer,
     [airPollutionApi.reducerPath]: airPollutionApi.reducer,
     [starredApi.reducerPath]: starredApi.reducer,
   },

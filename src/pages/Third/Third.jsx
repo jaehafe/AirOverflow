@@ -1,9 +1,19 @@
-import React from 'react';
-import { useAddStarMutation, useDeleteStarMutation } from '../../redux/features/starred';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserInfo } from '../../redux/features/userSlice';
 
 function Third() {
-  // const [addStar, { isLoading: isAdding }] = useAddStarMutation();
-  // const [deleteStar, { isLoading: isDeleting }] = useDeleteStarMutation();
+  const { activeUser } = useSelector((state) => state.userInfo);
+  console.log('activeUser', activeUser);
+  const dispatch = useDispatch();
+
+  let code = new URL(window.location.href).searchParams.get('code');
+  console.log('code', code);
+
+  useEffect(() => {
+    dispatch(setUserInfo(code));
+  }, []);
+
   return <div>Third</div>;
 }
 
