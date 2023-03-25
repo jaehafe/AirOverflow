@@ -30,7 +30,7 @@ export const airPollutionApi = createApi({
           numOfRows: params.numOfRows,
           pageNo: params.pageNo,
           addr: params.addr,
-          // stationName: params.stationName,
+          stationName: params.stationName,
           ver: '1.0',
         },
       }),

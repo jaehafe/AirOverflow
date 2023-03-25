@@ -14,7 +14,7 @@ function First() {
     isLoading: APIsLoading,
   } = useGetAirPollutionQuery({
     pageNo: 1,
-    sidoName: '대전',
+    sidoName: '서울',
     numOfRows: 100,
   });
 
@@ -23,7 +23,12 @@ function First() {
     error: stationErr,
     isFetching: stationFetching,
     isLoading: stationLoading,
-  } = useGetStationNameQuery({ pageNo: 1, addr: '은평구', numOfRows: 100 });
+  } = useGetStationNameQuery({
+    pageNo: 1,
+    addr: '서울',
+    stationName: '',
+    numOfRows: 100,
+  });
 
   // const items = stationData?.response?.body?.items;
   // console.log('items', items);
