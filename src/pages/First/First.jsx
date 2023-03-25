@@ -1,13 +1,15 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
+import * as S from './First.style';
 import DisplayDataOnMap from '../../components/DisplayDataOnMap/DisplayDataOnMap';
 import {
   useGetAirPollutionQuery,
   useGetStationNameQuery,
 } from '../../redux/features/airPollution';
 import { getSidoName } from '../../utils/getSidoName';
-import * as S from './First.style';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSidoName } from '../../redux/features/sidoSlice';
+
+import useToast, { asyncNotify, successNotify } from '../../hooks/useToast';
 
 function First() {
   const dispatch = useDispatch();
@@ -71,6 +73,7 @@ function First() {
         stationName: '',
       })
     );
+    successNotify('성공');
   };
 
   const handleStationName = (selectedOption) => {
@@ -103,6 +106,7 @@ function First() {
 
   return (
     <S.Container>
+      {useToast()}
       {/* select */}
       <S.HeaderSelectWrapper>
         <h3>어디에 살고 계신가요?</h3>

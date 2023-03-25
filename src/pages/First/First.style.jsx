@@ -20,6 +20,11 @@ export const HeaderSelectWrapper = styled.div`
   background-color: #fff;
   border: 1px solid;
   border-radius: 20px;
+  opacity: 0.6;
+  &:hover,
+  &:active {
+    opacity: 1;
+  }
 
   & h3 {
   }
