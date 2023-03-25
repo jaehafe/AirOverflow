@@ -14,7 +14,7 @@ function First() {
     isLoading: APIsLoading,
   } = useGetAirPollutionQuery({
     pageNo: 1,
-    sidoName: '서울',
+    sidoName: '부산',
     numOfRows: 100,
   });
 
@@ -25,7 +25,7 @@ function First() {
     isLoading: stationLoading,
   } = useGetStationNameQuery({
     pageNo: 1,
-    addr: '서울',
+    addr: '부산',
     stationName: '',
     numOfRows: 100,
   });

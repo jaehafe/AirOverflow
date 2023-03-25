@@ -52,7 +52,7 @@ function DisplayDataOnMap({ APData, stationData, stationFetching, stationErr }) 
 
   useEffect(() => {
     mapscript();
-  }, []);
+  }, [stationDataItems, APitems]);
 
   // marker 표시
   function displayMarker(locPosition, message) {
