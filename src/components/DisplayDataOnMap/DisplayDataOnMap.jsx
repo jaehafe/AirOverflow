@@ -1,24 +1,32 @@
 import React, { useEffect, useState } from 'react';
+import useToast, { asyncNotify } from '../../hooks/useToast';
 import * as S from './DisplayDataOnMap.style';
-import { useGetStationNameQuery } from '../../redux/features/airPollution';
 
 const { kakao } = window;
 
-function DisplayDataOnMap({ APData, stationData, stationFetching, stationErr }) {
-  // const {
-  //   data: stationData,
-  //   error: stationErr,
-  //   isFetching: stationFetching,
-  //   isLoading: stationLoading,
-  // } = useGetStationNameQuery({ addr: '서울' });
-  // , stationName: '종로구'
+function DisplayDataOnMap({
+  APData,
+  stationData,
+  stationFetching,
+  stationErr,
+  addStar,
+  isAdding,
+  deleteStar,
+  isDeleting,
+}) {
   const [mapInstance, setMapInstance] = useState(null);
 
-  // const {
-  //   response: {
-  //     body: { items },
-  //   },
-  // } = stationData;
+  const handleAddFavorite = async (data) => {
+    // console.log('data', data);
+    try {
+      const resultPromise = addStar({ data });
+      // console.log('resultPromise', resultPromise);
+      asyncNotify(resultPromise, data.stationName);
+      await resultPromise.unwrap();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const stationDataItems = stationData?.response?.body?.items;
   const APDataItems = APData?.response?.body?.items;
@@ -46,7 +54,7 @@ function DisplayDataOnMap({ APData, stationData, stationFetching, stationErr }) 
   }
 
   const mergedData = mergeData(stationDataItems, APDataItems);
-  console.log('mergedData', mergedData);
+  // console.log('mergedData', mergedData);
 
   /////////////////////////////////////////
 
@@ -105,15 +113,26 @@ function DisplayDataOnMap({ APData, stationData, stationFetching, stationErr }) 
     };
 
     mergedData?.forEach((data) => {
-      const content = `
-        <div class="overlaybox" style="background-color:${
-          colorByPM10Value(data.pm10Value).color
-        }">
-          <div class="boxtitle">${data.stationName}</div>
-          <div class="boxsubtitle">${data.pm10Value}</div>
-          <div class="boxsubtitle">${colorByPM10Value(data.pm10Value).label}</div>
-        </div>
+      const content = document.createElement('div');
+      content.className = 'overlaybox';
+      content.style.backgroundColor = colorByPM10Value(data.pm10Value).color;
+      content.innerHTML = `
+        <div class="boxtitle">${data.stationName}</div>
+        <div class="boxsubtitle">${data.pm10Value}</div>
+        <div class="boxsubtitle">${colorByPM10Value(data.pm10Value).label}</div>
       `;
+
+      content.addEventListener('click', () => handleAddFavorite(data));
+
+      // const content = `
+      //   <div class="overlaybox" style="background-color:${
+      //     colorByPM10Value(data.pm10Value).color
+      //   }" onclick="handleAddFavorite(${data.stationName})">
+      //     <div class="boxtitle">${data.stationName}</div>
+      //     <div class="boxsubtitle">${data.pm10Value}</div>
+      //     <div class="boxsubtitle">${colorByPM10Value(data.pm10Value).label}</div>
+      //   </div>
+      // `;
 
       const customOverlay = new kakao.maps.CustomOverlay({
         //마커가 표시 될 지도
@@ -127,6 +146,11 @@ function DisplayDataOnMap({ APData, stationData, stationFetching, stationErr }) 
       });
 
       customOverlay.setMap(map);
+
+      kakao.maps.event.addListener(customOverlay, 'click', () => {
+        console.log('123');
+        // 마커 위에 인포윈도우를 표시합니다
+      });
     });
   };
 
@@ -167,6 +191,7 @@ function DisplayDataOnMap({ APData, stationData, stationFetching, stationErr }) 
 
   return (
     <div>
+      {useToast()}
       <S.MapContainer id="map"></S.MapContainer>
       <S.CurrentLocationButton onClick={getCurrentLocation}>
         <S.StyledBiCurrentLocation />

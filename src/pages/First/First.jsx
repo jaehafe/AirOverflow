@@ -10,11 +10,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setSidoName } from '../../redux/features/sidoSlice';
 
 import useToast, { asyncNotify, successNotify } from '../../hooks/useToast';
+import { useAddStarMutation, useDeleteStarMutation } from '../../redux/features/starred';
 
 function First() {
   const dispatch = useDispatch();
   const { activeSido } = useSelector((state) => state.sido);
-  console.log('activeSido', activeSido);
+  // console.log('activeSido', activeSido);
   const {
     data: APData,
     error: APErr,
@@ -38,8 +39,8 @@ function First() {
     numOfRows: activeSido.numOfRows,
   });
 
-  // const items = stationData?.response?.body?.items;
-  // console.log('items', items);
+  const [addStar, { isLoading: isAdding }] = useAddStarMutation();
+  const [deleteStar, { isLoading: isDeleting }] = useDeleteStarMutation();
 
   if (stationLoading || APIsLoading || stationFetching || APIsFetching) {
     return <div>isFetching ...</div>;
@@ -51,14 +52,14 @@ function First() {
 
   const stationDataItems = stationData?.response?.body?.items;
   const APitems = APData?.response?.body?.items;
-  console.log('APitems', APitems);
-  console.log('stationDataItems', stationDataItems);
+  // console.log('APitems', APitems);
+  // console.log('stationDataItems', stationDataItems);
 
   if (!stationDataItems || !APitems) {
     return <div>Data is not ready</div>;
   }
   const sidoStationName = APitems.map((item) => item.stationName);
-  console.log('sidoStationName', sidoStationName);
+  // console.log('sidoStationName', sidoStationName);
 
   /////////////////////////////////////////
 
@@ -130,6 +131,10 @@ function First() {
         stationData={stationData}
         stationErr={stationErr}
         stationFetching={stationFetching}
+        addStar={addStar}
+        isAdding={isAdding}
+        deleteStar={deleteStar}
+        isDeleting={isDeleting}
       />
     </S.Container>
   );
