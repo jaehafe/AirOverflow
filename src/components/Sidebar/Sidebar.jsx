@@ -33,9 +33,9 @@ function Sidebar() {
       </S.AsideMenu>
       {/*  */}
       <S.AsideMenu>
-        <S.AsideMenuTitle>미세먼지 검색2</S.AsideMenuTitle>
+        <S.AsideMenuTitle>즐겨찾기</S.AsideMenuTitle>
         <S.AsideMenuSubtitle onClick={() => navigate('/second')}>
-          미세먼지 sec
+          즐겨찾는 지역
         </S.AsideMenuSubtitle>
         {/* <S.AsideMenuSubtitle>
           IT 스킬 체크업
