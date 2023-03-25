@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import DisplayDataOnMap from '../../components/DisplayDataOnMap/DisplayDataOnMap';
 import {
   useGetAirPollutionQuery,
   useGetStationNameQuery,
 } from '../../redux/features/airPollution';
+import { getSidoName } from '../../utils/getSidoName';
 import * as S from './First.style';
 
 function First() {
@@ -49,13 +50,34 @@ function First() {
   if (!stationDataItems || !APitems) {
     return <div>Data is not ready</div>;
   }
+  const sidoStationName = stationDataItems.map((item) => item.stationName);
+  console.log('sidoStationName', sidoStationName);
 
   /////////////////////////////////////////
+
+  // const SidoOptions = useMemo(() => getSidoName(), []);
 
   return (
     <S.Container>
       {/* select */}
-      <S.HeaderSelectWrapper>123123123123123123123123123</S.HeaderSelectWrapper>
+      <S.HeaderSelectWrapper>
+        <h3>어디에 살고 계신가요?</h3>
+        <S.SelectWrapper>
+          <S.SidoSelect
+            placeholder="시/도 선택"
+            options={getSidoName.map((sido) => ({
+              label: sido,
+              value: sido,
+            }))}
+          />
+          <S.StationNameSelect
+            options={sidoStationName.map((station) => ({
+              label: station,
+              value: station,
+            }))}
+          />
+        </S.SelectWrapper>
+      </S.HeaderSelectWrapper>
       <DisplayDataOnMap
         APData={APData}
         stationData={stationData}
