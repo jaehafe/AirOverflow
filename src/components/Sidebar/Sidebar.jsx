@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import LoginModal from '../LoginModal/LoginModal';
 import * as S from './Sidebar.style';
 
-function Sidebar() {
+function Sidebar({ isOpenLoginModal, setIsOpenLoginModal }) {
   const navigate = useNavigate();
   const handleNavigateToSearch = () => {
     navigate('/first');
   };
   return (
     <S.Container>
+      {isOpenLoginModal && <LoginModal setIsOpenLoginModal={setIsOpenLoginModal} />}
       <S.AsideLogo>
         <S.StyledLink to="/">
           <S.Logo src="../../../public/logo.svg" />
@@ -19,7 +21,7 @@ function Sidebar() {
         </S.StyledLink>
       </S.AsideLogo>
       {/*  */}
-      <S.AsideMember>로그인 하기</S.AsideMember>
+      <S.AsideMember onClick={() => setIsOpenLoginModal(true)}>로그인 하기</S.AsideMember>
       {/*  */}
       <S.AsideMenu>
         <S.AsideMenuTitle>미세먼지 검색</S.AsideMenuTitle>
@@ -43,10 +45,8 @@ function Sidebar() {
         </S.AsideMenuSubtitle> */}
       </S.AsideMenu>
       <S.AsideMenu>
-        <S.AsideMenuTitle>미세먼지 검색3</S.AsideMenuTitle>
-        <S.AsideMenuSubtitle onClick={() => navigate('/third')}>
-          미세먼지 trd
-        </S.AsideMenuSubtitle>
+        <S.AsideMenuTitle>로그인</S.AsideMenuTitle>
+        <S.AsideMenuSubtitle>로그인</S.AsideMenuSubtitle>
         {/* <S.AsideMenuSubtitle>
           IT 스킬 체크업
           <S.StyledAiOutlineHome />

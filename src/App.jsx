@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from './App.style';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import Sidebar from './components/Sidebar/Sidebar';
@@ -6,11 +6,17 @@ import Home from './pages/Home/Home';
 import Second from './pages/Second/Second';
 import First from './pages/First/First';
 import Third from './pages/Third/Third';
+import LoginModal from './components/LoginModal/LoginModal';
 
 const SidebarLayout = () => {
+  const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
+
   return (
     <S.Wrapper>
-      <Sidebar />
+      <Sidebar
+        isOpenLoginModal={isOpenLoginModal}
+        setIsOpenLoginModal={setIsOpenLoginModal}
+      />
       <Outlet />
     </S.Wrapper>
   );
