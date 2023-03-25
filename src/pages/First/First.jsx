@@ -6,17 +6,20 @@ import {
 } from '../../redux/features/airPollution';
 import { getSidoName } from '../../utils/getSidoName';
 import * as S from './First.style';
+import { useSelector } from 'react-redux';
 
 function First() {
+  const { activeSido } = useSelector((state) => state.sido);
+  console.log('activeSido', activeSido);
   const {
     data: APData,
     error: APErr,
     isFetching: APIsFetching,
     isLoading: APIsLoading,
   } = useGetAirPollutionQuery({
-    pageNo: 1,
-    sidoName: '부산',
-    numOfRows: 100,
+    pageNo: activeSido.pageNo, // 1
+    sidoName: activeSido.sidoName, // 서울
+    numOfRows: activeSido.numOfRows, // 100
   });
 
   const {
@@ -25,10 +28,10 @@ function First() {
     isFetching: stationFetching,
     isLoading: stationLoading,
   } = useGetStationNameQuery({
-    pageNo: 1,
-    addr: '부산',
-    stationName: '',
-    numOfRows: 100,
+    pageNo: activeSido.pageNo,
+    addr: activeSido.sidoName,
+    stationName: activeSido.stationName,
+    numOfRows: activeSido.numOfRows,
   });
 
   // const items = stationData?.response?.body?.items;
