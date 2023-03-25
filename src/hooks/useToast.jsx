@@ -3,14 +3,15 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const successNotify = (message) => toast.success(message);
 const errorNotify = (message) => toast(message, { icon: '😝' });
-const asyncNotify = (myPromise, messages = {}, config = {}) => {
+
+const asyncNotify = (myPromise, stationName, messages = {}, config = {}) => {
   const { loading, success, error } = messages;
 
   return toast.promise(
     myPromise,
     {
       loading: loading || 'Loading',
-      success: success || ((data) => `Successfully saved ${data.name}`),
+      success: () => `${stationName} 즐겨찾기 저장 완료`,
       error: error || ((err) => `This just happened: ${err.toString()}`),
     },
     {
