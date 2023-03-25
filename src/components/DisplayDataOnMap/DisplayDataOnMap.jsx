@@ -84,7 +84,7 @@ function DisplayDataOnMap({ APData, stationData, stationFetching, stationErr }) 
   const mapscript = () => {
     const container = document.getElementById('map');
     const options = {
-      center: new kakao.maps.LatLng(mergedData[0].dmX, mergedData[0].dmY),
+      center: new kakao.maps.LatLng(mergedData[0]?.dmX, mergedData[0]?.dmY),
       level: 8,
     };
 
@@ -104,7 +104,7 @@ function DisplayDataOnMap({ APData, stationData, stationFetching, stationErr }) 
       }
     };
 
-    mergedData.forEach((data) => {
+    mergedData?.forEach((data) => {
       const content = `
         <div class="overlaybox" style="background-color:${
           colorByPM10Value(data.pm10Value).color

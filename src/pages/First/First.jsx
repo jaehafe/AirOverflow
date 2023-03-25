@@ -14,7 +14,7 @@ function First() {
     isLoading: APIsLoading,
   } = useGetAirPollutionQuery({
     pageNo: 1,
-    sidoName: '서울',
+    sidoName: '대전',
     numOfRows: 100,
   });
 
@@ -23,7 +23,7 @@ function First() {
     error: stationErr,
     isFetching: stationFetching,
     isLoading: stationLoading,
-  } = useGetStationNameQuery({ pageNo: 1, addr: '서울', numOfRows: 100 });
+  } = useGetStationNameQuery({ pageNo: 1, addr: '은평구', numOfRows: 100 });
 
   // const items = stationData?.response?.body?.items;
   // console.log('items', items);
@@ -38,6 +38,8 @@ function First() {
 
   const stationDataItems = stationData?.response?.body?.items;
   const APitems = APData?.response?.body?.items;
+  console.log('APitems', APitems);
+  console.log('stationDataItems', stationDataItems);
 
   if (!stationDataItems || !APitems) {
     return <div>Data is not ready</div>;
@@ -47,7 +49,8 @@ function First() {
 
   return (
     <S.Container>
-      <S.Header>123123123123123123123123123</S.Header>
+      {/* select */}
+      <S.HeaderSelectWrapper>123123123123123123123123123</S.HeaderSelectWrapper>
       <DisplayDataOnMap
         APData={APData}
         stationData={stationData}

@@ -4,7 +4,7 @@ export const Container = styled.div`
   position: relative;
 `;
 
-export const Header = styled.div`
+export const HeaderSelectWrapper = styled.div`
   width: 400px;
   height: 60px;
   z-index: 2;
