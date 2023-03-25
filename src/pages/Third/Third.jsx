@@ -34,6 +34,7 @@ function Third() {
         params.toString(),
         kakaoLoginConfig
       );
+      localStorage.setItem('access_token', JSON.stringify(res.data.access_token));
       console.log('res', res);
     } catch (error) {
       console.log('소셜로그인 에러', error);
@@ -41,6 +42,24 @@ function Third() {
       // navigate('/');
     }
   };
+
+  const access_token = JSON.parse(localStorage.getItem('access_token')) || null;
+  const getTokenInfo = async () => {
+    try {
+      const res = await axios.get('https://kapi.kakao.com/v1/user/access_token_info', {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      });
+      console.log('토큰 정보!!!!', res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getTokenInfo();
+  }, [access_token]);
 
   useEffect(() => {
     getToken();
