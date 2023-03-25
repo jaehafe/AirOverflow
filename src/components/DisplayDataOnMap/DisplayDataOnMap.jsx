@@ -21,12 +21,12 @@ function DisplayDataOnMap({ APData, stationData, stationFetching, stationErr }) 
   // } = stationData;
 
   const stationDataItems = stationData?.response?.body?.items;
-  const APitems = APData?.response?.body?.items;
+  const APDataItems = APData?.response?.body?.items;
 
   // /////////////////////////////////////////
-  function mergeData(stationDataItems, APitems) {
+  function mergeData(stationDataItems, APDataItems) {
     const mergedData = stationDataItems?.reduce((acc, stationItem) => {
-      const foundAPitem = APitems?.find(
+      const foundAPitem = APDataItems?.find(
         (APitem) => APitem.stationName === stationItem.stationName
       );
 
@@ -45,14 +45,14 @@ function DisplayDataOnMap({ APData, stationData, stationFetching, stationErr }) 
     return mergedData;
   }
 
-  const mergedData = mergeData(stationDataItems, APitems);
+  const mergedData = mergeData(stationDataItems, APDataItems);
   console.log('mergedData', mergedData);
 
   /////////////////////////////////////////
 
   useEffect(() => {
     mapscript();
-  }, [stationDataItems, APitems]);
+  }, [stationDataItems, APDataItems]);
 
   // marker 표시
   function displayMarker(locPosition, message) {

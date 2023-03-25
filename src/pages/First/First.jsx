@@ -55,7 +55,7 @@ function First() {
   if (!stationDataItems || !APitems) {
     return <div>Data is not ready</div>;
   }
-  const sidoStationName = stationDataItems.map((item) => item.stationName);
+  const sidoStationName = APitems.map((item) => item.stationName);
   console.log('sidoStationName', sidoStationName);
 
   /////////////////////////////////////////
@@ -83,6 +83,24 @@ function First() {
     );
   };
 
+  const sidoNameOptions = () => {
+    return getSidoName.map((sido) => ({
+      label: sido,
+      value: sido,
+      disabled: sido === '전국',
+    }));
+  };
+
+  const stationOptions = () => {
+    return [
+      { label: '전체보기', value: '' },
+      ...sidoStationName.map((station) => ({
+        label: station,
+        value: station,
+      })),
+    ];
+  };
+
   return (
     <S.Container>
       {/* select */}
@@ -93,19 +111,13 @@ function First() {
             placeholder="시/도 선택"
             onChange={handleSidoChange}
             value={activeSido.sidoName}
-            options={getSidoName.map((sido) => ({
-              label: sido,
-              value: sido,
-            }))}
+            options={sidoNameOptions()}
           />
           <S.StationNameSelect
             placeholder="지역 선택"
             value={activeSido.stationName}
             onChange={handleStationName}
-            options={sidoStationName.map((station) => ({
-              label: station,
-              value: station,
-            }))}
+            options={stationOptions()}
           />
         </S.SelectWrapper>
       </S.HeaderSelectWrapper>
