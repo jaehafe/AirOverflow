@@ -9,7 +9,6 @@ import { getSidoName } from '../../utils/getSidoName';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSidoName } from '../../redux/features/sidoSlice';
 
-import useToast, { asyncNotify, successNotify } from '../../hooks/useToast';
 import { useAddStarMutation, useDeleteStarMutation } from '../../redux/features/starred';
 
 function First() {
@@ -74,7 +73,6 @@ function First() {
         stationName: '',
       })
     );
-    successNotify('성공');
   };
 
   const handleStationName = (selectedOption) => {
@@ -107,7 +105,6 @@ function First() {
 
   return (
     <S.Container>
-      {useToast()}
       {/* select */}
       <S.HeaderSelectWrapper>
         <h3>어디에 살고 계신가요?</h3>

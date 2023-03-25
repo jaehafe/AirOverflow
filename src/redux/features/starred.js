@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const starredApi = createApi({
   reducerPath: 'starred',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${import.meta.env.VITE_STARRED_BASE_URL}`,
+    baseUrl: `${import.meta.env.VITE_STARRED_BASE_URL123}`,
   }),
 
   endpoints: (builder) => ({

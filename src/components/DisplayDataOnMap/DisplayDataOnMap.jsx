@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import useToast, { asyncNotify } from '../../hooks/useToast';
+import { useAsyncNotify, ToastContainer } from '../../hooks/useToast';
 import * as S from './DisplayDataOnMap.style';
 
 const { kakao } = window;
@@ -14,17 +14,18 @@ function DisplayDataOnMap({
   deleteStar,
   isDeleting,
 }) {
+  const { asyncNotify } = useAsyncNotify();
   const [mapInstance, setMapInstance] = useState(null);
 
   const handleAddFavorite = async (data) => {
     // console.log('data', data);
+    const resultPromise = addStar({ data });
     try {
-      const resultPromise = addStar({ data });
-      // console.log('resultPromise', resultPromise);
-      asyncNotify(resultPromise, data.stationName);
       await resultPromise.unwrap();
+      asyncNotify(resultPromise, data.stationName);
     } catch (err) {
       console.log(err);
+      asyncNotify(resultPromise, data.stationName);
     }
   };
 
@@ -191,7 +192,7 @@ function DisplayDataOnMap({
 
   return (
     <div>
-      {useToast()}
+      <ToastContainer />
       <S.MapContainer id="map"></S.MapContainer>
       <S.CurrentLocationButton onClick={getCurrentLocation}>
         <S.StyledBiCurrentLocation />
