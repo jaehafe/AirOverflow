@@ -153,18 +153,29 @@ function DisplayDataOnMap({
   };
 
   const getCurrentLocation = async () => {
-    try {
-      const position = await getCurrentPositionAsync();
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
+    const messages = {
+      loading: '현재 위치 가져오는 중...',
+      success: () => '현재 위치를 성공적으로 가져왔습니다!',
+      error: () => `현재 위치 가져오기 실패.`,
+    };
 
-      const locPosition = new kakao.maps.LatLng(lat, lon);
-      const message = '<div class="info-title">여기에 계신가요?!</div>';
+    const wrappedGetCurrentPositionAsync = async () => {
+      try {
+        const position = await getCurrentPositionAsync();
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
 
-      displayMarker(locPosition, message);
-    } catch (err) {
-      console.log(err);
-    }
+        const locPosition = new kakao.maps.LatLng(lat, lon);
+        const message = '<div class="info-title">여기에 계신가요?!</div>';
+
+        displayMarker(locPosition, message);
+      } catch (err) {
+        console.log(err);
+        throw err;
+      }
+    };
+
+    asyncToast(wrappedGetCurrentPositionAsync(), null, messages);
   };
 
   return (
