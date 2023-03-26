@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { useAsyncNotify, ToastContainer } from '../../hooks/useToast';
 import * as S from './DisplayDataOnMap.style';
 
@@ -10,22 +11,29 @@ function DisplayDataOnMap({
   stationFetching,
   stationErr,
   addStar,
-  isAdding,
   deleteStar,
-  isDeleting,
 }) {
-  const { asyncNotify } = useAsyncNotify();
   const [mapInstance, setMapInstance] = useState(null);
 
-  const handleAddFavorite = async (data) => {
-    // console.log('data', data);
-    const resultPromise = addStar({ data });
+  const handleAddStar = async (data) => {
     try {
-      await resultPromise.unwrap();
-      asyncNotify(resultPromise, data.stationName);
+      const resultPromise = addStar({ data }).unwrap();
+
+      toast.promise(
+        resultPromise,
+        {
+          loading: '저장중...',
+          success: `${data.stationName} 즐겨찾기 저장 완료`,
+          error: `즐겨찾기에 실패했습니다.`,
+        },
+        {
+          style: {
+            minWidth: '250px',
+          },
+        }
+      );
     } catch (err) {
       console.log(err);
-      asyncNotify(resultPromise, data.stationName);
     }
   };
 
@@ -123,7 +131,7 @@ function DisplayDataOnMap({
         <div class="boxsubtitle">${colorByPM10Value(data.pm10Value).label}</div>
       `;
 
-      content.addEventListener('click', () => handleAddFavorite(data));
+      content.addEventListener('click', () => handleAddStar(data));
 
       // const content = `
       //   <div class="overlaybox" style="background-color:${
@@ -165,7 +173,6 @@ function DisplayDataOnMap({
   };
 
   const getCurrentLocation = async () => {
-    // setIsLoading(true);
     try {
       const position = await getCurrentPositionAsync();
       const lat = position.coords.latitude;
@@ -177,18 +184,8 @@ function DisplayDataOnMap({
       displayMarker(locPosition, message);
     } catch (err) {
       console.log(err);
-    } finally {
-      // setIsLoading(false);
     }
   };
-
-  // if (stationFetching) {
-  //   return <div>isFetching ...</div>;
-  // }
-
-  // if (stationErr) {
-  //   return <div>{stationErr.message}</div>;
-  // }
 
   return (
     <div>
