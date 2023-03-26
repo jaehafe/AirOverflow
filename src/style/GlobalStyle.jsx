@@ -3,21 +3,21 @@ import styled, { createGlobalStyle } from 'styled-components';
 export const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: 'GmarketSans';
-    src: url('../../public/fonts/GmarketSansTTFBold.ttf');
+    src: url('/fonts/GmarketSansTTFBold.ttf');
     /* font-weight: 500; */
     font-style: normal;
   }
 
   @font-face {
     font-family: 'GmarketSansMedium';
-    src: url('../../public/fonts/GmarketSansTTFMedium.ttf');
+    src: url('/fonts/GmarketSansTTFMedium.ttf');
     font-weight: normal;
     font-style: normal;
   }
 
   @font-face {
     font-family: 'GmarketSansLight';
-    src: url('../../public/fonts/GmarketSansTTFLight.ttf');
+    src: url('/fonts/GmarketSansTTFLight.ttf');
     font-weight: normal;
     font-style: normal;
   }

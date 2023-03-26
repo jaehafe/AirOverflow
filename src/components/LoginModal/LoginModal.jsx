@@ -1,6 +1,8 @@
 import React from 'react';
 import * as S from './LoginModal.style';
 import ReactDOM from 'react-dom';
+import { message } from 'antd';
+
 const REDIRECT_URI = 'http://localhost:5173/third';
 
 function LoginModal({ isOpenLoginModal, setIsOpenLoginModal }) {
@@ -13,6 +15,7 @@ function LoginModal({ isOpenLoginModal, setIsOpenLoginModal }) {
   };
 
   const handleGithubLogin = () => {
+    message.info('서비스 준비중입니다.');
     console.log('123');
   };
 
@@ -25,7 +28,7 @@ function LoginModal({ isOpenLoginModal, setIsOpenLoginModal }) {
         </S.ModalHeader>
 
         <S.LogoWrapper>
-          <S.Logo src="../../../public/logo.svg" />
+          <S.Logo src="/logo.svg" />
           <S.LogoTextWrapper>
             <h3>Air </h3>
             <h3>Overflow</h3>
@@ -34,14 +37,8 @@ function LoginModal({ isOpenLoginModal, setIsOpenLoginModal }) {
         <S.Message>로그인하고 장소를 저장해 보세요!</S.Message>
         {/* 카카오 버튼 */}
         <S.ButtonWrapper>
-          <S.KakaoLoginButton
-            src="../../../public/kakao-button.svg"
-            onClick={handleKaokaoLogin}
-          />
-          <S.GithubLoginButton
-            src="../../../public/github-button.png"
-            onClick={handleGithubLogin}
-          />
+          <S.KakaoLoginButton src="/kakao-button.svg" onClick={handleKaokaoLogin} />
+          <S.GithubLoginButton src="/github-button.png" onClick={handleGithubLogin} />
         </S.ButtonWrapper>
       </S.Container>
     </>,

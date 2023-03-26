@@ -32,6 +32,7 @@ export const LogoTextWrapper = styled.div`
 `;
 
 // 로그인
+export const AsideMemberWrapper = styled.div``;
 export const AsideMember = styled.h4`
   display: flex;
   justify-content: center;
@@ -40,6 +41,10 @@ export const AsideMember = styled.h4`
   background-color: var(--background-color);
   cursor: pointer;
 `;
+export const AsideLogin = styled(AsideMember)``;
+export const AsideLogout = styled(AsideMember)``;
+
+//
 export const AsideMenu = styled.div`
   padding: 15px 30px;
   border-bottom: 1px solid var(--division);
