@@ -43,6 +43,8 @@ function Third() {
     }
   }, [code, getToken]);
 
+  const userId = tokenInfoData?.id;
+
   useEffect(() => {
     if (getTokenSuccess) {
       if (tokenData?.access_token) {
@@ -50,7 +52,7 @@ function Third() {
         localStorage.setItem('access_token', JSON.stringify({ access_token, id_token }));
         setCookie(
           'airoverflow',
-          { access_token },
+          { access_token, userId },
           {
             path: '/',
             sameSite: 'lax',
@@ -64,7 +66,7 @@ function Third() {
         // navigate('/first');
       }
     }
-  }, [tokenData]);
+  }, [tokenData, tokenInfoData]);
 
   console.log('tokenInfoData', tokenInfoData);
 

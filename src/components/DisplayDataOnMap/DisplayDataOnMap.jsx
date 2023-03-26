@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as S from './DisplayDataOnMap.style';
 import { colorByPM10Value } from '../../utils/mapUtils';
 import { useAsyncToast, ToastContainer } from '../../hooks/useToast';
+import { useCookies } from 'react-cookie';
 
 const { kakao } = window;
 
@@ -13,8 +14,10 @@ function DisplayDataOnMap({
   addStar,
   deleteStar,
 }) {
+  const [cookie] = useCookies(['airoverflow']);
   const { asyncToast } = useAsyncToast();
   const [mapInstance, setMapInstance] = useState(null);
+  const userId = cookie?.airoverflow?.userId;
 
   const handleAddStar = async (data) => {
     const messages = {
@@ -24,7 +27,7 @@ function DisplayDataOnMap({
     };
 
     try {
-      const resultPromise = addStar({ data }).unwrap();
+      const resultPromise = addStar({ data, userId }).unwrap();
       asyncToast(resultPromise, data, messages);
     } catch (err) {
       console.log(err);
