@@ -35,7 +35,22 @@ export const kakaoLoginApi = createApi({
         },
       }),
     }),
+
+    logoutKakao: builder.mutation({
+      query: (access_token) => ({
+        url: 'https://kapi.kakao.com/v1/user/logout',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Authorization: `Bearer ${access_token}`,
+        },
+      }),
+    }),
   }),
 });
 
-export const { useGetUserTokenMutation, useGetUserTokenInfoQuery } = kakaoLoginApi;
+export const {
+  useGetUserTokenMutation,
+  useGetUserTokenInfoQuery,
+  useLogoutKakaoMutation,
+} = kakaoLoginApi;

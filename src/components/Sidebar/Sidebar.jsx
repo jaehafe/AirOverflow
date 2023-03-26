@@ -5,24 +5,43 @@ import LoginModal from '../LoginModal/LoginModal';
 import * as S from './Sidebar.style';
 
 import { message } from 'antd';
+import { useLogoutKakaoMutation } from '../../redux/features/kakaoLogin';
+import { useAsyncToast } from '../../hooks/useToast';
 
 function Sidebar({ isOpenLoginModal, setIsOpenLoginModal }) {
+  const { asyncToast } = useAsyncToast();
+  const [logoutKakao, { isLoading: isLoadingKakaoLogout }] = useLogoutKakaoMutation();
   const [cookie] = useCookies(['airoverflow']);
   const [, , removeCookie] = useCookies(['airoverflow']);
-  console.log('airoverflow cookie', cookie);
+  // console.log('airoverflow cookie', cookie);
 
   const navigate = useNavigate();
   const handleNavigateToSearch = () => {
     navigate('/first');
   };
 
-  const handleLogout = () => {
-    console.log('123');
+  console.log('cookie.airoverflow?.access_token->', cookie?.airoverflow?.access_token);
+  const handleLogout = async () => {
+    const messages = {
+      loading: '로그아웃 중...',
+      success: () => '로그아웃 성공',
+      error: () => '로그아웃 실패',
+    };
+
     // removeCookie('airoverflow', { path: '/' }, () => {
     //   message.success('로그아웃 하였습니다.');
     // });
-    removeCookie('airoverflow');
-    message.success('로그아웃 하였습니다.');
+    try {
+      const logoutResult = logoutKakao(cookie?.airoverflow?.access_token).unwrap();
+      console.log('logoutResult', logoutResult);
+
+      asyncToast(logoutResult, null, messages);
+    } catch (err) {
+      console.log(err);
+      throw err;
+    } finally {
+      removeCookie('airoverflow');
+    }
   };
 
   return (
