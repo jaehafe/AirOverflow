@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { useAsyncNotify, ToastContainer } from '../../hooks/useToast';
+import { useAsyncToast, ToastContainer } from '../../hooks/useToast';
 import * as S from './DisplayDataOnMap.style';
 
 const { kakao } = window;
@@ -13,25 +13,17 @@ function DisplayDataOnMap({
   addStar,
   deleteStar,
 }) {
+  const { asyncToast } = useAsyncToast();
   const [mapInstance, setMapInstance] = useState(null);
 
   const handleAddStar = async (data) => {
     try {
       const resultPromise = addStar({ data }).unwrap();
-
-      toast.promise(
-        resultPromise,
-        {
-          loading: '저장중...',
-          success: `${data.stationName} 즐겨찾기 저장 완료`,
-          error: `즐겨찾기에 실패했습니다.`,
-        },
-        {
-          style: {
-            minWidth: '250px',
-          },
-        }
-      );
+      asyncToast(resultPromise, data, {
+        loading: '저장중...',
+        success: (data) => `${data.stationName} 즐겨찾기 저장 완료`,
+        error: (err) => `즐겨찾기를 실패했어요.`,
+      });
     } catch (err) {
       console.log(err);
     }
