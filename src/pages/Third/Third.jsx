@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -9,18 +10,41 @@ import {
 import { setUserInfo } from '../../redux/features/userSlice';
 
 function Third() {
+  const [, setCookie] = useCookies();
   // const navigate = useNavigate();
   const { activeUser } = useSelector((state) => state.userInfo);
   console.log('activeUser', activeUser);
   const dispatch = useDispatch();
 
+  const [
+    getToken,
+    { data: tokenData, error: getTokenError, isSuccess: getTokenSuccess },
+  ] = useGetUserTokenMutation();
+  const { data: tokenInfoData, error: getTokenInfoError } = useGetUserTokenInfoQuery(
+    tokenData?.access_token,
+    {
+      skip: !tokenData?.access_token,
+    }
+  );
+
   let code = new URL(window.location.href).searchParams.get('code');
   console.log('code', code);
 
-  const [getToken, { data: tokenData }] = useGetUserTokenMutation();
-  const { data: tokenInfoData } = useGetUserTokenInfoQuery(tokenData?.access_token, {
-    skip: !tokenData?.access_token,
-  });
+  const onSuccess = (isFirst, accessToken) => {
+    setCookie('airoverflow', accessToken, {
+      path: '/',
+      sameSite: 'lax',
+      secure: true,
+    });
+    if (isFirst) navigate('/second');
+    else navigate('/');
+  };
+
+  const onError = () => {
+    message
+      .error('로그인에 문제가 발생했습니다.\n잠시 후 다시 시도해 주세요 :(')
+      .then(() => navigate('/'));
+  };
 
   useEffect(() => {
     if (code) {
