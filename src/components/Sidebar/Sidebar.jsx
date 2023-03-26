@@ -16,9 +16,6 @@ function Sidebar({ isOpenLoginModal, setIsOpenLoginModal }) {
   // console.log('airoverflow cookie', cookie);
 
   const navigate = useNavigate();
-  const handleNavigateToSearch = () => {
-    navigate('/first');
-  };
 
   console.log('cookie.airoverflow?.access_token->', cookie?.airoverflow?.access_token);
   const handleLogout = async () => {
@@ -70,7 +67,7 @@ function Sidebar({ isOpenLoginModal, setIsOpenLoginModal }) {
       {/*  */}
       <S.AsideMenu>
         <S.AsideMenuTitle>미세먼지 검색</S.AsideMenuTitle>
-        <S.AsideMenuSubtitle onClick={handleNavigateToSearch}>
+        <S.AsideMenuSubtitle onClick={() => navigate('/search')}>
           미세먼지 지도
         </S.AsideMenuSubtitle>
         {/* <S.AsideMenuSubtitle>
@@ -81,7 +78,7 @@ function Sidebar({ isOpenLoginModal, setIsOpenLoginModal }) {
       {/*  */}
       <S.AsideMenu>
         <S.AsideMenuTitle>즐겨찾기</S.AsideMenuTitle>
-        <S.AsideMenuSubtitle onClick={() => navigate('/second')}>
+        <S.AsideMenuSubtitle onClick={() => navigate('/starred')}>
           즐겨찾는 지역
         </S.AsideMenuSubtitle>
         {/* <S.AsideMenuSubtitle>

@@ -1,7 +1,7 @@
 import React from 'react';
-import * as S from './Second.style';
+import * as S from './Starred.style';
 
-function Second() {
+function Starred() {
   // const { data, error, isFetching, isLoading } = useGetAirPollutionQuery({
   //   pageNo: 1,
   //   sidoName: '서울',
@@ -11,4 +11,4 @@ function Second() {
   return <div>123</div>;
 }
 
-export default Second;
+export default Starred;

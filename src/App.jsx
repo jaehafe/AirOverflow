@@ -3,10 +3,9 @@ import * as S from './App.style';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import Sidebar from './components/Sidebar/Sidebar';
 import Home from './pages/Home/Home';
-import Second from './pages/Second/Second';
-import First from './pages/First/First';
+import Starred from './pages/Starred/Starred';
+import Search from './pages/Search/Search';
 import Third from './pages/Third/Third';
-import LoginModal from './components/LoginModal/LoginModal';
 
 const SidebarLayout = () => {
   const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
@@ -37,8 +36,8 @@ const router = createBrowserRouter([
         path: '/',
         element: <HomeLayout />,
         children: [
-          { path: '/first', element: <First /> },
-          { path: '/second', element: <Second /> },
+          { path: '/search', element: <Search /> },
+          { path: '/starred', element: <Starred /> },
           { path: '/third', element: <Third /> },
         ],
       },

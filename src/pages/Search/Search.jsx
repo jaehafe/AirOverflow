@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
-import * as S from './First.style';
+import * as S from './Search.style';
 import DisplayDataOnMap from '../../components/DisplayDataOnMap/DisplayDataOnMap';
 import {
   useGetAirPollutionQuery,
@@ -11,7 +11,7 @@ import { setSidoName } from '../../redux/features/sidoSlice';
 
 import { useAddStarMutation, useDeleteStarMutation } from '../../redux/features/starred';
 
-function First() {
+function Search() {
   const dispatch = useDispatch();
   const { activeSido } = useSelector((state) => state.sido);
   // console.log('activeSido', activeSido);
@@ -137,4 +137,4 @@ function First() {
   );
 }
 
-export default First;
+export default Search;
