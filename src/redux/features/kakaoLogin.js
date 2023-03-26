@@ -1,0 +1,39 @@
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+export const kakaoLoginApi = createApi({
+  reducerPath: 'kakaoLoginApi',
+  baseQuery: fetchBaseQuery(),
+  endpoints: (builder) => ({
+    getUserToken: builder.mutation({
+      query: ({ code }) => {
+        const tokenData = {
+          grant_type: 'authorization_code',
+          client_id: `${import.meta.env.VITE_KAKAO_REST_API_KEY}`,
+          redirect_uri: 'http://localhost:5173/third',
+          code,
+        };
+        const params = new URLSearchParams(tokenData);
+
+        return {
+          url: 'https://kauth.kakao.com/oauth/token',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+          },
+          body: params.toString(),
+        };
+      },
+    }),
+
+    getUserTokenInfo: builder.query({
+      query: (access_token) => ({
+        url: 'https://kapi.kakao.com/v1/user/access_token_info',
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      }),
+    }),
+  }),
+});
+
+export const { useGetUserTokenMutation, useGetUserTokenInfoQuery } = kakaoLoginApi;

@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import { airPollutionApi } from '../features/airPollution';
 import { starredApi } from '../features/starred';
+import { kakaoLoginApi } from '../features/kakaoLogin';
 
 import sidoReducer from '../features/sidoSlice';
 import userReducer from '../features/userSlice';
@@ -12,9 +13,15 @@ const store = configureStore({
     userInfo: userReducer,
     [airPollutionApi.reducerPath]: airPollutionApi.reducer,
     [starredApi.reducerPath]: starredApi.reducer,
+    [kakaoLoginApi.reducerPath]: kakaoLoginApi.reducer,
   },
+
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(airPollutionApi.middleware, starredApi.middleware),
+    getDefaultMiddleware().concat(
+      airPollutionApi.middleware,
+      starredApi.middleware,
+      kakaoLoginApi.middleware
+    ),
 });
 
 setupListeners(store.dispatch);
