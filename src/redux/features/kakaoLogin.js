@@ -4,8 +4,9 @@ export const kakaoLoginApi = createApi({
   reducerPath: 'kakaoLoginApi',
   baseQuery: fetchBaseQuery(),
   endpoints: (builder) => ({
+    // 로그인한 유저 토큰 받기
     getUserToken: builder.mutation({
-      query: ({ code }) => {
+      query: (code) => {
         const tokenData = {
           grant_type: 'authorization_code',
           client_id: `${import.meta.env.VITE_KAKAO_REST_API_KEY}`,
@@ -25,6 +26,7 @@ export const kakaoLoginApi = createApi({
       },
     }),
 
+    // 로그인한 유저 토큰 정보 받기
     getUserTokenInfo: builder.query({
       query: (access_token) => ({
         url: 'https://kapi.kakao.com/v1/user/access_token_info',

@@ -48,7 +48,7 @@ function Third() {
 
   useEffect(() => {
     if (code) {
-      getToken({ code });
+      getToken(code);
     }
   }, [code, getToken]);
 
