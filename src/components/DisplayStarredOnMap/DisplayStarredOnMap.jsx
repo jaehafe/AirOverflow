@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import * as S from './DisplayStarredOnMap.style';
 import { colorByPM10Value } from '../../utils/mapUtils';
 import { useAsyncToast, ToastContainer } from '../../hooks/useToast';
+import { useDeleteStarMutation } from '../../redux/features/starred';
 
 const { kakao } = window;
 
-function DisplayStarredOnMap({ loggedInUserValues }) {
+function DisplayStarredOnMap({ starredData, loggedInUserValues }) {
+  const [deleteStar] = useDeleteStarMutation();
   const { asyncToast } = useAsyncToast();
   useEffect(() => {
     if (loggedInUserValues) {
@@ -13,16 +15,28 @@ function DisplayStarredOnMap({ loggedInUserValues }) {
     }
   }, [loggedInUserValues]);
 
-  const handleDeleteStar = async (data) => {
+  console.log('loggedInUserValues', loggedInUserValues);
+  const handleDeleteStar = async (target) => {
+    console.log('target', target);
+    let keyToDelete = null;
+
+    for (const key in starredData) {
+      if (starredData[key]?.data?.stationName === target.stationName) {
+        keyToDelete = key;
+        break;
+      }
+    }
+
     const messages = {
       loading: '삭제중...',
-      success: (data) => `${data.stationName} 즐겨찾기 삭제 완료`,
+      success: (target) => `${target.stationName} 즐겨찾기 삭제 완료`,
       error: () => `즐겨찾기 삭제를 실패했어요.`,
     };
-
     try {
-      const resultPromise = addStar({ data, userId }).unwrap();
-      asyncToast(resultPromise, data, messages);
+      if (keyToDelete) {
+        const resultPromise = deleteStar(keyToDelete).unwrap();
+        asyncToast(resultPromise, target, messages);
+      }
     } catch (err) {
       console.log(err);
       throw err;

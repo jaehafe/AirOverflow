@@ -16,8 +16,8 @@ export const starredApi = createApi({
     }),
 
     deleteStar: builder.mutation({
-      query: (params) => ({
-        url: `/starred/${params.id}.json`,
+      query: (key) => ({
+        url: `/starred/${key}.json`,
         method: 'DELETE',
       }),
     }),
