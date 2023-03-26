@@ -10,7 +10,7 @@ export const kakaoLoginApi = createApi({
         const tokenData = {
           grant_type: 'authorization_code',
           client_id: `${import.meta.env.VITE_KAKAO_REST_API_KEY}`,
-          redirect_uri: 'http://localhost:5173/third',
+          redirect_uri: 'http://localhost:5173/KakaoLoginCallback',
           code,
         };
         const params = new URLSearchParams(tokenData);

@@ -5,7 +5,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 import Home from './pages/Home/Home';
 import Starred from './pages/Starred/Starred';
 import Search from './pages/Search/Search';
-import Third from './pages/Third/Third';
+import KakaoLoginCallback from './pages/KakaoLoginCallback/KakaoLoginCallback';
 
 const SidebarLayout = () => {
   const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
         children: [
           { path: '/search', element: <Search /> },
           { path: '/starred', element: <Starred /> },
-          { path: '/third', element: <Third /> },
+          { path: '/KakaoLoginCallback', element: <KakaoLoginCallback /> },
         ],
       },
     ],

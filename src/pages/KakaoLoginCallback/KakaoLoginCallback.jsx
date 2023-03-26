@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import * as S from './Third.style';
+import * as S from './KakaoLoginCallback.style';
 import { useCookies } from 'react-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +10,7 @@ import {
 import { setUserInfo } from '../../redux/features/userSlice';
 import { message, Spin } from 'antd';
 
-function Third() {
+function KakaoLoginCallback() {
   const [, setCookie] = useCookies();
   const navigate = useNavigate();
   const { activeUser } = useSelector((state) => state.userInfo);
@@ -62,8 +62,7 @@ function Third() {
 
         message
           .success('로그인에 성공했습니다. 원을 클릭해서 즐겨찾기에 저장해보세요.')
-          .then(() => navigate('/first'));
-        // navigate('/first');
+          .then(() => navigate('/search'));
       }
     }
   }, [tokenData, tokenInfoData]);
@@ -89,4 +88,4 @@ function Third() {
   );
 }
 
-export default Third;
+export default KakaoLoginCallback;

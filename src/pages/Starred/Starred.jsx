@@ -1,12 +1,9 @@
 import React from 'react';
 import * as S from './Starred.style';
+import { useCookies } from 'react-cookie';
 
 function Starred() {
-  // const { data, error, isFetching, isLoading } = useGetAirPollutionQuery({
-  //   pageNo: 1,
-  //   sidoName: '서울',
-  //   numOfRows: 10,
-  // });
+  const [cookie] = useCookies(['airoverflow']);
 
   return <div>123</div>;
 }
