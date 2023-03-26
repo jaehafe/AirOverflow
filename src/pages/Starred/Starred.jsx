@@ -24,30 +24,28 @@ function Starred() {
     return <div>Error loading starred data.</div>;
   }
 
-  const starredDataValues = starredData ? Object.values(starredData) : [];
-  const loggedInUserData = starredDataValues.filter(
-    (value) => value.userId === loggedInUserId
-  );
-
-  const loggedInUserValues = loggedInUserData.map((data) => {
-    const {
-      data: { dmX, dmY, stationName, pm10Value },
-    } = data;
-    return { dmX, dmY, stationName, pm10Value };
+  const starredDataEntries = starredData ? Object.entries(starredData) : [];
+  const allStarredDataArr = starredDataEntries.map(([key, value]) => {
+    return { id: key, value };
   });
 
-  console.log('starredData', starredData);
-  console.log('starredDataValues', starredDataValues);
-  // console.log('loggedInUserData', loggedInUserData);
-  console.log('loggedInUserValues', loggedInUserValues);
+  const loggedInUserData = allStarredDataArr.filter(
+    (data) => data.value.userId === loggedInUserId
+  );
+
+  console.log('loggedInUserData', loggedInUserData);
+
+  // console.log('starredDataEntries', starredDataEntries);
+
+  // console.log('starredDataArr', starredDataArr);
 
   //////////////////////////////////////
 
   return (
     <>
       <DisplayStarredOnMap
-        starredData={starredData}
-        loggedInUserValues={loggedInUserValues}
+        allStarredDataArr={allStarredDataArr}
+        loggedInUserData={loggedInUserData}
       />
     </>
   );

@@ -61,8 +61,8 @@ function DisplayDataOnMap({
   }
 
   const mergedData = mergeData(stationDataItems, APDataItems);
-  console.log('mergedData', mergedData);
-  console.log('APDataItems', APDataItems);
+  // console.log('mergedData', mergedData);
+  // console.log('APDataItems', APDataItems);
 
   /////////////////////////////////////////
 

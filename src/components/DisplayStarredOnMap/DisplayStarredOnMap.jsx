@@ -6,37 +6,29 @@ import { useDeleteStarMutation } from '../../redux/features/starred';
 
 const { kakao } = window;
 
-function DisplayStarredOnMap({ starredData, loggedInUserValues }) {
+function DisplayStarredOnMap({ loggedInUserData, allStarredDataArr }) {
   const [deleteStar] = useDeleteStarMutation();
   const { asyncToast } = useAsyncToast();
   useEffect(() => {
-    if (loggedInUserValues) {
+    if (loggedInUserData) {
       mapscript();
     }
-  }, [loggedInUserValues]);
+  }, [loggedInUserData]);
 
-  console.log('loggedInUserValues', loggedInUserValues);
-  const handleDeleteStar = async (target) => {
+  const stationNameArr = loggedInUserData.map((data) => data.value.data.stationName);
+  console.log('stationNameArr', stationNameArr);
+
+  const handleDeleteStar = (target) => {
     console.log('target', target);
-    let keyToDelete = null;
-
-    for (const key in starredData) {
-      if (starredData[key]?.data?.stationName === target.stationName) {
-        keyToDelete = key;
-        break;
-      }
-    }
 
     const messages = {
       loading: '삭제중...',
-      success: (target) => `${target.stationName} 즐겨찾기 삭제 완료`,
+      success: (target) => `${target.value.data.stationName} 즐겨찾기 삭제 완료`,
       error: () => `즐겨찾기 삭제를 실패했어요.`,
     };
     try {
-      if (keyToDelete) {
-        const resultPromise = deleteStar(keyToDelete).unwrap();
-        asyncToast(resultPromise, target, messages);
-      }
+      const resultPromise = deleteStar(target.id).unwrap();
+      asyncToast(resultPromise, target, messages);
     } catch (err) {
       console.log(err);
       throw err;
@@ -48,8 +40,8 @@ function DisplayStarredOnMap({ starredData, loggedInUserValues }) {
     const container = document.getElementById('map');
     const options = {
       center: new kakao.maps.LatLng(
-        loggedInUserValues[0]?.dmX,
-        loggedInUserValues[0]?.dmY
+        loggedInUserData[0]?.value.data.dmX,
+        loggedInUserData[0]?.value.data.dmY
       ),
       level: 8,
     };
@@ -57,14 +49,16 @@ function DisplayStarredOnMap({ starredData, loggedInUserValues }) {
     //map
     const map = new kakao.maps.Map(container, options);
 
-    loggedInUserValues?.forEach((data) => {
+    loggedInUserData?.forEach((data) => {
       const content = document.createElement('div');
       content.className = 'overlaybox';
-      content.style.backgroundColor = colorByPM10Value(data.pm10Value).color;
+      content.style.backgroundColor = colorByPM10Value(data.value.data.pm10Value).color;
       content.innerHTML = `
-        <div class="boxtitle">${data.stationName}</div>
-        <div class="boxsubtitle">${data.pm10Value}</div>
-        <div class="boxsubtitle">${colorByPM10Value(data.pm10Value).label}</div>
+        <div class="boxtitle">${data.value.data.stationName}</div>
+        <div class="boxsubtitle">${data.value.data.pm10Value}</div>
+        <div class="boxsubtitle">${
+          colorByPM10Value(data.value.data.pm10Value).label
+        }</div>
       `;
 
       content.addEventListener('click', () => handleDeleteStar(data));
@@ -73,7 +67,7 @@ function DisplayStarredOnMap({ starredData, loggedInUserValues }) {
         //마커가 표시 될 지도
         map: map,
         //마커가 표시 될 위치
-        position: new kakao.maps.LatLng(data.dmX, data.dmY),
+        position: new kakao.maps.LatLng(data.value.data.dmX, data.value.data.dmY),
         content: content,
         // image: markerImage,
         xAnchor: 0.3,
