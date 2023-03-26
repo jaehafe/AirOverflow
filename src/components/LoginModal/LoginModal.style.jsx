@@ -58,10 +58,19 @@ export const LogoTextWrapper = styled.div`
 
 export const ButtonWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
 `;
-export const KakaoLogo = styled.img`
+export const KakaoLoginButton = styled.img`
   cursor: pointer;
+`;
+export const GithubLoginButton = styled.img`
+  margin-top: 20px;
+  cursor: pointer;
+  width: 300px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 10px;
 `;
 export const Message = styled.h4`
   display: flex;

@@ -8,8 +8,12 @@ function LoginModal({ isOpenLoginModal, setIsOpenLoginModal }) {
     import.meta.env.VITE_KAKAO_REST_API_KEY
   }&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
-  const handleLogin = () => {
+  const handleKaokaoLogin = () => {
     window.location.href = KAKAO_AUTH_URL;
+  };
+
+  const handleGithubLogin = () => {
+    console.log('123');
   };
 
   return ReactDOM.createPortal(
@@ -30,7 +34,14 @@ function LoginModal({ isOpenLoginModal, setIsOpenLoginModal }) {
         <S.Message>로그인하고 장소를 저장해 보세요!</S.Message>
         {/* 카카오 버튼 */}
         <S.ButtonWrapper>
-          <S.KakaoLogo src="../../../public/kakao-button.svg" onClick={handleLogin} />
+          <S.KakaoLoginButton
+            src="../../../public/kakao-button.svg"
+            onClick={handleKaokaoLogin}
+          />
+          <S.GithubLoginButton
+            src="../../../public/github-button.png"
+            onClick={handleGithubLogin}
+          />
         </S.ButtonWrapper>
       </S.Container>
     </>,
