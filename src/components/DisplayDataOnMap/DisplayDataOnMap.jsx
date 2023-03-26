@@ -23,7 +23,7 @@ function DisplayDataOnMap({
     const messages = {
       loading: '저장중...',
       success: (data) => `${data.stationName} 즐겨찾기 저장 완료`,
-      error: (err) => `즐겨찾기를 실패했어요.`,
+      error: () => `즐겨찾기를 실패했어요.`,
     };
 
     try {

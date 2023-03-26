@@ -6,9 +6,28 @@ import { useAsyncToast, ToastContainer } from '../../hooks/useToast';
 const { kakao } = window;
 
 function DisplayStarredOnMap({ loggedInUserValues }) {
+  const { asyncToast } = useAsyncToast();
   useEffect(() => {
-    mapscript();
+    if (loggedInUserValues) {
+      mapscript();
+    }
   }, [loggedInUserValues]);
+
+  const handleDeleteStar = async (data) => {
+    const messages = {
+      loading: '삭제중...',
+      success: (data) => `${data.stationName} 즐겨찾기 삭제 완료`,
+      error: () => `즐겨찾기 삭제를 실패했어요.`,
+    };
+
+    try {
+      const resultPromise = addStar({ data, userId }).unwrap();
+      asyncToast(resultPromise, data, messages);
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  };
 
   // 맵 그려주는 함수
   const mapscript = () => {
@@ -34,7 +53,7 @@ function DisplayStarredOnMap({ loggedInUserValues }) {
         <div class="boxsubtitle">${colorByPM10Value(data.pm10Value).label}</div>
       `;
 
-      content.addEventListener('click', () => handleAddStar(data));
+      content.addEventListener('click', () => handleDeleteStar(data));
 
       const customOverlay = new kakao.maps.CustomOverlay({
         //마커가 표시 될 지도
@@ -48,18 +67,18 @@ function DisplayStarredOnMap({ loggedInUserValues }) {
       });
 
       customOverlay.setMap(map);
-
-      kakao.maps.event.addListener(customOverlay, 'click', () => {
-        console.log('123');
-        // 마커 위에 인포윈도우를 표시합니다
-      });
     });
   };
 
   return (
     <>
       <ToastContainer />
-      <S.MapContainer id="map"></S.MapContainer>
+      <S.MapContainer id="map" />
+      {/* {loggedInUserValues.length > 0 ? (
+        <S.MapContainer id="map"></S.MapContainer>
+      ) : (
+        <>'즐겨찾기 한 데이터가 없습니다.'</>
+      )} */}
     </>
   );
 }

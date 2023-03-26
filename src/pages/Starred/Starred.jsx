@@ -1,7 +1,10 @@
 import React from 'react';
 import * as S from './Starred.style';
 import { useCookies } from 'react-cookie';
-import { useGetStarOfCurrentLoggedInUserQuery } from '../../redux/features/starred';
+import {
+  useDeleteStarMutation,
+  useGetStarOfCurrentLoggedInUserQuery,
+} from '../../redux/features/starred';
 import DisplayStarredOnMap from '../../components/DisplayStarredOnMap/DisplayStarredOnMap';
 
 function Starred() {
@@ -15,6 +18,8 @@ function Starred() {
     isLoading: isLoadingGetStarred,
     isError: isErrGetStarred,
   } = useGetStarOfCurrentLoggedInUserQuery();
+
+  const [deleteStar] = useDeleteStarMutation();
 
   if (isLoadingGetStarred) {
     return <div>Loading...</div>;
@@ -36,8 +41,9 @@ function Starred() {
     return { dmX, dmY, stationName, pm10Value };
   });
 
+  console.log('starredData', starredData);
+  console.log('starredDataValues', starredDataValues);
   // console.log('loggedInUserData', loggedInUserData);
-  // console.log('starredData', starredDataValues);
   console.log('loggedInUserValues', loggedInUserValues);
 
   //////////////////////////////////////
