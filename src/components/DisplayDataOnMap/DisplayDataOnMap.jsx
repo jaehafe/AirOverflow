@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { toast } from 'react-hot-toast';
-import { useAsyncToast, ToastContainer } from '../../hooks/useToast';
 import * as S from './DisplayDataOnMap.style';
+import { colorByPM10Value } from '../../utils/mapUtils';
+import { useAsyncToast, ToastContainer } from '../../hooks/useToast';
 
 const { kakao } = window;
 
@@ -100,18 +100,6 @@ function DisplayDataOnMap({
     //map
     const map = new kakao.maps.Map(container, options);
     setMapInstance(map);
-
-    const colorByPM10Value = (value) => {
-      if (value <= 30) {
-        return { label: '좋음', color: '#32a852' }; // 색상을 원하는 값으로 변경하세요.
-      } else if (31 <= value && value <= 80) {
-        return { label: '보통', color: '#f5b853' };
-      } else if (81 <= value && value <= 150) {
-        return { label: '나쁨', color: '#e75b3f' };
-      } else {
-        return { label: '매우 나쁨', color: '#c0392b' };
-      }
-    };
 
     mergedData?.forEach((data) => {
       const content = document.createElement('div');

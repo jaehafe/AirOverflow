@@ -5,7 +5,7 @@ import {
   useGetAirPollutionQuery,
   useGetStationNameQuery,
 } from '../../redux/features/airPollution';
-import { getSidoName } from '../../utils/getSidoName';
+import { getSidoName } from '../../utils/mapUtils';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSidoName } from '../../redux/features/sidoSlice';
 
