@@ -2,6 +2,7 @@ import React from 'react';
 import * as S from './Starred.style';
 import { useCookies } from 'react-cookie';
 import { useGetStarOfCurrentLoggedInUserQuery } from '../../redux/features/starred';
+import DisplayStarredOnMap from '../../components/DisplayStarredOnMap/DisplayStarredOnMap';
 
 function Starred() {
   const [cookie] = useCookies(['airoverflow']);
@@ -30,16 +31,22 @@ function Starred() {
 
   const loggedInUserValues = loggedInUserData.map((data) => {
     const {
-      data: { dmX, dmY, stationName },
+      data: { dmX, dmY, stationName, pm10Value },
     } = data;
-    return { dmX, dmY, stationName };
+    return { dmX, dmY, stationName, pm10Value };
   });
 
   // console.log('loggedInUserData', loggedInUserData);
   // console.log('starredData', starredDataValues);
   console.log('loggedInUserValues', loggedInUserValues);
 
-  return <div>123</div>;
+  //////////////////////////////////////
+
+  return (
+    <>
+      <DisplayStarredOnMap loggedInUserValues={loggedInUserValues} />
+    </>
+  );
 }
 
 export default Starred;
