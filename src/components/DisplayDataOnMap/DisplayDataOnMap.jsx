@@ -17,15 +17,18 @@ function DisplayDataOnMap({
   const [mapInstance, setMapInstance] = useState(null);
 
   const handleAddStar = async (data) => {
+    const messages = {
+      loading: '저장중...',
+      success: (data) => `${data.stationName} 즐겨찾기 저장 완료`,
+      error: (err) => `즐겨찾기를 실패했어요.`,
+    };
+
     try {
       const resultPromise = addStar({ data }).unwrap();
-      asyncToast(resultPromise, data, {
-        loading: '저장중...',
-        success: (data) => `${data.stationName} 즐겨찾기 저장 완료`,
-        error: (err) => `즐겨찾기를 실패했어요.`,
-      });
+      asyncToast(resultPromise, data, messages);
     } catch (err) {
       console.log(err);
+      throw err;
     }
   };
 
