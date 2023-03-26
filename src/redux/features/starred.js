@@ -21,8 +21,19 @@ export const starredApi = createApi({
         method: 'DELETE',
       }),
     }),
+
+    getStarOfCurrentLoggedInUser: builder.query({
+      query: () => ({
+        url: '/starred.json',
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
-export const { useAddStarMutation, useDeleteStarMutation } = starredApi;
+export const {
+  useAddStarMutation,
+  useDeleteStarMutation,
+  useGetStarOfCurrentLoggedInUserQuery,
+} = starredApi;
 console.log('starredApi', starredApi);
