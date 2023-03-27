@@ -67,6 +67,9 @@ function Search() {
     (data) => data.value.userId === loggedInUserId
   );
 
+  const filteredStationName = loggedInUserData.map((data) => data.value.data.stationName);
+  console.log('filteredStationName', filteredStationName);
+
   ///////////////////
 
   if (stationLoading || APIsLoading || stationFetching || APIsFetching) {
@@ -150,13 +153,8 @@ function Search() {
       <DisplayDataOnMap
         APData={APData}
         stationData={stationData}
-        stationErr={stationErr}
-        stationFetching={stationFetching}
         addStar={addStar}
-        isAdding={isAdding}
-        deleteStar={deleteStar}
-        isDeleting={isDeleting}
-        loggedInUserData={loggedInUserData}
+        filteredStationName={filteredStationName}
         refetchStarred={refetchStarred}
       />
     </S.Container>

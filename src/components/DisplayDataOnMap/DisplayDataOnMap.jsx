@@ -10,20 +10,14 @@ const { kakao } = window;
 function DisplayDataOnMap({
   APData,
   stationData,
-  stationFetching,
-  stationErr,
   addStar,
-  deleteStar,
-  loggedInUserData,
   refetchStarred,
+  filteredStationName,
 }) {
   const [cookie] = useCookies(['airoverflow']);
   const { asyncToast } = useAsyncToast();
   const [mapInstance, setMapInstance] = useState(null);
   const userId = cookie?.airoverflow?.userId;
-
-  const filteredStationName = loggedInUserData.map((data) => data.value.data.stationName);
-  console.log('filteredStationName', filteredStationName);
 
   const handleAddStar = (data) => {
     const checkStationName = filteredStationName.find(
