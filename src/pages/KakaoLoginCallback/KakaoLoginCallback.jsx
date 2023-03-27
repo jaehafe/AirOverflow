@@ -44,6 +44,7 @@ function KakaoLoginCallback() {
   }, [code, getToken]);
 
   const userId = tokenInfoData?.id;
+  console.log('userId', userId);
 
   useEffect(() => {
     if (getTokenSuccess) {

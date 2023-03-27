@@ -3,6 +3,7 @@ import * as S from './DisplayDataOnMap.style';
 import { colorByPM10Value } from '../../utils/mapUtils';
 import { useAsyncToast, ToastContainer } from '../../hooks/useToast';
 import { useCookies } from 'react-cookie';
+import { message } from 'antd';
 
 const { kakao } = window;
 
@@ -13,13 +14,28 @@ function DisplayDataOnMap({
   stationErr,
   addStar,
   deleteStar,
+  loggedInUserData,
+  refetchStarred,
 }) {
   const [cookie] = useCookies(['airoverflow']);
   const { asyncToast } = useAsyncToast();
   const [mapInstance, setMapInstance] = useState(null);
   const userId = cookie?.airoverflow?.userId;
 
+  const filteredStationName = loggedInUserData.map((data) => data.value.data.stationName);
+  console.log('filteredStationName', filteredStationName);
+
   const handleAddStar = (data) => {
+    const checkStationName = filteredStationName.find(
+      (station) => station === data.stationName
+    );
+    if (checkStationName) {
+      message.info(`'${data.stationName}'은/는 이미 즐겨찾기에 저장하였습니다.`);
+      return;
+    }
+    console.log(checkStationName);
+    console.log('data!!!', data);
+
     const messages = {
       loading: '저장중...',
       success: (data) => `${data.stationName} 즐겨찾기 저장 완료`,
@@ -29,6 +45,7 @@ function DisplayDataOnMap({
     try {
       const resultPromise = addStar({ data, userId }).unwrap();
       asyncToast(resultPromise, data, messages);
+      refetchStarred();
     } catch (err) {
       console.log(err);
       throw err;

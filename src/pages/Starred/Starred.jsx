@@ -15,7 +15,7 @@ function Starred() {
     isLoading: isLoadingGetStarred,
     isError: isErrGetStarred,
     refetch: refetchStarred,
-  } = useGetStarOfCurrentLoggedInUserQuery({ refetchOnMountOrArgChange: true });
+  } = useGetStarOfCurrentLoggedInUserQuery({ refetchOnMountOrArgChange: false });
 
   useEffect(() => {
     refetchStarred();

@@ -9,10 +9,16 @@ import { getSidoName } from '../../utils/mapUtils';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSidoName } from '../../redux/features/sidoSlice';
 
-import { useAddStarMutation, useDeleteStarMutation } from '../../redux/features/starred';
+import {
+  useAddStarMutation,
+  useDeleteStarMutation,
+  useGetStarOfCurrentLoggedInUserQuery,
+} from '../../redux/features/starred';
 import { Spin } from 'antd';
+import { useCookies } from 'react-cookie';
 
 function Search() {
+  const [cookie] = useCookies(['airoverflow']);
   const dispatch = useDispatch();
   const { activeSido } = useSelector((state) => state.sido);
   // console.log('activeSido', activeSido);
@@ -39,8 +45,29 @@ function Search() {
     numOfRows: activeSido.numOfRows,
   });
 
+  const {
+    data: starredData,
+    isLoading: isLoadingGetStarred,
+    isError: isErrGetStarred,
+    refetch: refetchStarred,
+  } = useGetStarOfCurrentLoggedInUserQuery({ refetchOnMountOrArgChange: true });
+
   const [addStar, { isLoading: isAdding }] = useAddStarMutation();
   const [deleteStar, { isLoading: isDeleting }] = useDeleteStarMutation();
+
+  const loggedInUserId = cookie?.airoverflow?.userId;
+
+  ////////////////////
+  const starredDataEntries = starredData ? Object.entries(starredData) : [];
+  const allStarredDataArr = starredDataEntries.map(([key, value]) => {
+    return { id: key, value };
+  });
+
+  const loggedInUserData = allStarredDataArr.filter(
+    (data) => data.value.userId === loggedInUserId
+  );
+
+  ///////////////////
 
   if (stationLoading || APIsLoading || stationFetching || APIsFetching) {
     return (
@@ -129,6 +156,8 @@ function Search() {
         isAdding={isAdding}
         deleteStar={deleteStar}
         isDeleting={isDeleting}
+        loggedInUserData={loggedInUserData}
+        refetchStarred={refetchStarred}
       />
     </S.Container>
   );
