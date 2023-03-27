@@ -21,7 +21,8 @@ function DisplayStarredOnMap({
   const { asyncToast } = useAsyncToast();
 
   ///////////////
-
+  const data = [];
+  console.log('starredSidoName', starredSidoName);
   useEffect(() => {
     dispatch(
       setSidoName({
@@ -32,12 +33,14 @@ function DisplayStarredOnMap({
     console.log('activeSido!!!!!!!!!', activeSido);
     // console.log('starredSidoName[0]?.sidoName', starredSidoName[0]?.sidoName);
     // console.log('starredSidoName[0]?.stationName', starredSidoName[0]?.stationName);
-    console.log('APData', APData);
-    const filtered = APData?.response?.body?.items?.find(
+    const APDataItems = APData?.response?.body?.items;
+    console.log('APData', APDataItems);
+    const filtered = APDataItems?.find(
       (data) => data.stationName === starredSidoName[0]?.stationName
     );
     console.log('filtered', filtered);
-    console.log('starredSidoName', starredSidoName);
+    data.push(filtered);
+    console.log(data);
   }, [activeSido, starredSidoName]);
 
   //////////////

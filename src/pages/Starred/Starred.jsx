@@ -56,6 +56,8 @@ function Starred() {
   // console.log('starredDataArr', starredDataArr);
   const starredSidoName = loggedInUserData.map((data) => {
     return {
+      dmX: data.value.data.dmX,
+      dmY: data.value.data.dmY,
       sidoName: data.value.data.sidoName,
       stationName: data.value.data.stationName,
     };
