@@ -19,7 +19,7 @@ function DisplayDataOnMap({
   const [mapInstance, setMapInstance] = useState(null);
   const userId = cookie?.airoverflow?.userId;
 
-  const handleAddStar = async (data) => {
+  const handleAddStar = (data) => {
     const messages = {
       loading: '저장중...',
       success: (data) => `${data.stationName} 즐겨찾기 저장 완료`,
@@ -44,9 +44,11 @@ function DisplayDataOnMap({
       const foundAPitem = APDataItems?.find(
         (APitem) => APitem.stationName === stationItem.stationName
       );
-
+      // console.log('foundAPitem', foundAPitem);
+      // console.log('stationItem', stationItem);
       if (foundAPitem) {
         acc.push({
+          sidoName: foundAPitem.sidoName,
           stationName: stationItem.stationName,
           pm10Value: foundAPitem.pm10Value,
           dmX: stationItem.dmX,

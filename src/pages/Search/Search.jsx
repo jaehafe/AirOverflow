@@ -58,6 +58,7 @@ function Search() {
   const APitems = APData?.response?.body?.items;
   // console.log('APitems', APitems);
   // console.log('stationDataItems', stationDataItems);
+  // console.log('APitems', APitems);
 
   if (!stationDataItems || !APitems) {
     return <div>Data is not ready</div>;

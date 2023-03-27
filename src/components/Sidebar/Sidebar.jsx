@@ -18,7 +18,7 @@ function Sidebar({ isOpenLoginModal, setIsOpenLoginModal }) {
   const navigate = useNavigate();
 
   console.log('cookie.airoverflow?.access_token->', cookie?.airoverflow?.access_token);
-  const handleLogout = async () => {
+  const handleLogout = () => {
     const messages = {
       loading: '로그아웃 중...',
       success: () => '로그아웃 성공',
