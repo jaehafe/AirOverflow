@@ -56,22 +56,13 @@ function Search() {
 
   const stationDataItems = stationData?.response?.body?.items;
   const APitems = APData?.response?.body?.items;
-  // console.log('APitems', APitems);
-  // console.log('stationDataItems', stationDataItems);
-  // console.log('APitems', APitems);
 
   if (!stationDataItems || !APitems) {
     return <div>Data is not ready</div>;
   }
   const sidoStationName = APitems.map((item) => item.stationName);
-  // console.log('sidoStationName', sidoStationName);
-
-  /////////////////////////////////////////
-
-  // const SidoOptions = useMemo(() => getSidoName(), []);
 
   const handleSidoChange = (selectedOption) => {
-    // console.log('selectedOption', selectedOption);
     dispatch(
       setSidoName({
         ...activeSido,
