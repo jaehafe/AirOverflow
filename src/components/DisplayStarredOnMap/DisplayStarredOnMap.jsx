@@ -4,46 +4,12 @@ import { colorByPM10Value } from '../../utils/mapUtils';
 import { useAsyncToast, ToastContainer } from '../../hooks/useToast';
 import { useDeleteStarMutation } from '../../redux/features/starred';
 import EmptyData from '../EmptyData/EmptyData';
-import { setSidoName } from '../../redux/features/sidoSlice';
-import { useSelector, useDispatch } from 'react-redux';
 
 const { kakao } = window;
 
-function DisplayStarredOnMap({
-  starredSidoName,
-  APData,
-  loggedInUserData,
-  allStarredDataArr,
-}) {
-  const dispatch = useDispatch();
-  const { activeSido } = useSelector((state) => state.sido);
+function DisplayStarredOnMap({ loggedInUserData }) {
   const [deleteStar] = useDeleteStarMutation();
   const { asyncToast } = useAsyncToast();
-
-  ///////////////
-  const data = [];
-  console.log('starredSidoName', starredSidoName);
-  useEffect(() => {
-    dispatch(
-      setSidoName({
-        ...activeSido,
-        sidoName: starredSidoName[0]?.sidoName, // 인천
-      })
-    );
-    console.log('activeSido!!!!!!!!!', activeSido);
-    // console.log('starredSidoName[0]?.sidoName', starredSidoName[0]?.sidoName);
-    // console.log('starredSidoName[0]?.stationName', starredSidoName[0]?.stationName);
-    const APDataItems = APData?.response?.body?.items;
-    console.log('APData', APDataItems);
-    const filtered = APDataItems?.find(
-      (data) => data.stationName === starredSidoName[0]?.stationName
-    );
-    console.log('filtered', filtered);
-    data.push(filtered);
-    console.log(data);
-  }, [activeSido, starredSidoName]);
-
-  //////////////
 
   useEffect(() => {
     if (loggedInUserData.length > 0) {
@@ -116,9 +82,8 @@ function DisplayStarredOnMap({
 
   return (
     <>
-      {/* <button onClick={handleClick}>click!</button> */}
       <ToastContainer />
-      {/* <S.MapContainer id="map" /> */}
+
       {loggedInUserData.length > 0 ? <S.MapContainer id="map" /> : <EmptyData />}
     </>
   );
