@@ -7,7 +7,7 @@ export const StyledBiCurrentLocation = styled(BiCurrentLocation)`
 `;
 
 export const MapContainer = styled.div`
-  width: 100vh;
+  width: 970px;
   min-height: 100vh;
 
   .info-title {

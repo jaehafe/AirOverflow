@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const MapContainer = styled.div`
-  width: 100vh;
+  width: 100vw;
   min-height: 100vh;
 
   .info-title {

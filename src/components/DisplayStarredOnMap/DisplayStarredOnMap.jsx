@@ -3,6 +3,7 @@ import * as S from './DisplayStarredOnMap.style';
 import { colorByPM10Value } from '../../utils/mapUtils';
 import { useAsyncToast, ToastContainer } from '../../hooks/useToast';
 import { useDeleteStarMutation } from '../../redux/features/starred';
+import EmptyData from '../EmptyData/EmptyData';
 
 const { kakao } = window;
 
@@ -10,7 +11,7 @@ function DisplayStarredOnMap({ loggedInUserData, allStarredDataArr }) {
   const [deleteStar] = useDeleteStarMutation();
   const { asyncToast } = useAsyncToast();
   useEffect(() => {
-    if (loggedInUserData) {
+    if (loggedInUserData.length > 0) {
       mapscript();
     }
   }, [loggedInUserData]);
@@ -81,12 +82,8 @@ function DisplayStarredOnMap({ loggedInUserData, allStarredDataArr }) {
   return (
     <>
       <ToastContainer />
-      <S.MapContainer id="map" />
-      {/* {loggedInUserValues.length > 0 ? (
-        <S.MapContainer id="map"></S.MapContainer>
-      ) : (
-        <>'즐겨찾기 한 데이터가 없습니다.'</>
-      )} */}
+      {/* <S.MapContainer id="map" /> */}
+      {loggedInUserData.length > 0 ? <S.MapContainer id="map" /> : <EmptyData />}
     </>
   );
 }
