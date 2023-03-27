@@ -3,12 +3,8 @@ import * as S from './Starred.style';
 import { useCookies } from 'react-cookie';
 import { useGetStarOfCurrentLoggedInUserQuery } from '../../redux/features/starred';
 import DisplayStarredOnMap from '../../components/DisplayStarredOnMap/DisplayStarredOnMap';
-import { useGetAirPollutionQuery } from '../../redux/features/airPollution';
-import { useDispatch, useSelector } from 'react-redux';
 
 function Starred() {
-  const dispatch = useDispatch();
-  const { activeSido } = useSelector((state) => state.sido);
   const [cookie] = useCookies(['airoverflow']);
   // console.log('cookie.airoverflow?.userId', cookie?.airoverflow?.userId);
 
@@ -18,7 +14,12 @@ function Starred() {
     data: starredData,
     isLoading: isLoadingGetStarred,
     isError: isErrGetStarred,
+    refetch: refetchStarred,
   } = useGetStarOfCurrentLoggedInUserQuery({ refetchOnMountOrArgChange: true });
+
+  useEffect(() => {
+    refetchStarred();
+  }, [loggedInUserId, refetchStarred]);
 
   if (isLoadingGetStarred) {
     return <div>Loading...</div>;
