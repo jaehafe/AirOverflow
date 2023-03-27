@@ -6,11 +6,11 @@ export const Container = styled.aside`
   position: fixed;
 
   width: 230px;
-  border: 1px solid;
+
   min-height: 100vh;
   overflow-y: auto;
 
-  background-color: var(--off-white);
+  background-color: #fff;
 `;
 
 export const AsideLogo = styled.div`

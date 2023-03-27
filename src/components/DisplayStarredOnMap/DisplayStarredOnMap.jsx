@@ -85,10 +85,10 @@ function DisplayStarredOnMap({ loggedInUserData: initialData }) {
   };
 
   return (
-    <>
+    <div>
       <ToastContainer />
       {loggedInUserData.length > 0 ? <S.MapContainer id="map" /> : <EmptyData />}
-    </>
+    </div>
   );
 }
 

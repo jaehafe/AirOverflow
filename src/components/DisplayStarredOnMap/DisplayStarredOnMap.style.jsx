@@ -1,17 +1,12 @@
 import styled from 'styled-components';
 
 export const MapContainer = styled.div`
-  width: 100vw;
+  width: 970px;
   min-height: 100vh;
 
   .info-title {
     padding: 100px;
-    /* width: 100px;
-    height: 100px; */
     display: block;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
     background: #50627f;
     color: #fff;
     text-align: center;
@@ -22,7 +17,6 @@ export const MapContainer = styled.div`
   }
 
   .overlaybox {
-    /* position: relative; */
     width: 80px;
     height: 80px;
     padding: 15px 10px;
@@ -33,10 +27,6 @@ export const MapContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    /* --secondary-red: #e75b3f;
-    --secondary-yellow: #f5b853;
-    --secondary-cyan: #4eaaba; */
 
     & .boxtitle {
       color: var(--primary);
