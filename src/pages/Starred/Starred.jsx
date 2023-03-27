@@ -18,7 +18,7 @@ function Starred() {
     data: starredData,
     isLoading: isLoadingGetStarred,
     isError: isErrGetStarred,
-  } = useGetStarOfCurrentLoggedInUserQuery();
+  } = useGetStarOfCurrentLoggedInUserQuery({ refetchOnMountOrArgChange: true });
 
   if (isLoadingGetStarred) {
     return <div>Loading...</div>;

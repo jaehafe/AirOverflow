@@ -13,6 +13,7 @@ export const starredApi = createApi({
         method: 'POST',
         body: params,
       }),
+      providesTags: ['Starred'],
     }),
 
     deleteStar: builder.mutation({
@@ -20,6 +21,7 @@ export const starredApi = createApi({
         url: `/starred/${key}.json`,
         method: 'DELETE',
       }),
+      invalidatesTags: ['Starred'],
     }),
 
     getStarOfCurrentLoggedInUser: builder.query({
@@ -27,6 +29,7 @@ export const starredApi = createApi({
         url: '/starred.json',
         method: 'GET',
       }),
+      invalidatesTags: ['Starred'],
     }),
   }),
 });

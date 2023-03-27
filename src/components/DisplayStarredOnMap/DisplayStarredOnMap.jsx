@@ -9,7 +9,7 @@ const { kakao } = window;
 
 function DisplayStarredOnMap({ loggedInUserData: initialData }) {
   const [loggedInUserData, setLoggedInUserData] = useState(initialData);
-  const [deleteStar] = useDeleteStarMutation();
+  const [deleteStar] = useDeleteStarMutation({ refetchOnMountOrArgChange: true });
   const { asyncToast } = useAsyncToast();
 
   useEffect(() => {
