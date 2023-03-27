@@ -69,6 +69,7 @@ function Sidebar({ isOpenLoginModal, setIsOpenLoginModal }) {
         <S.AsideMenuTitle>미세먼지 검색</S.AsideMenuTitle>
         <S.AsideMenuSubtitle onClick={() => navigate('/')}>
           미세먼지 지도
+          <S.SearchBalloon>검색하기</S.SearchBalloon>
         </S.AsideMenuSubtitle>
       </S.AsideMenu>
       {/*  */}
@@ -76,11 +77,8 @@ function Sidebar({ isOpenLoginModal, setIsOpenLoginModal }) {
         <S.AsideMenuTitle>즐겨찾기</S.AsideMenuTitle>
         <S.AsideMenuSubtitle onClick={() => navigate('/starred')}>
           즐겨찾는 지역
+          <S.StarredBalloon>회원전용</S.StarredBalloon>
         </S.AsideMenuSubtitle>
-        {/* <S.AsideMenuSubtitle>
-          123
-          <S.StyledAiOutlineHome />
-        </S.AsideMenuSubtitle> */}
       </S.AsideMenu>
     </S.Container>
   );
