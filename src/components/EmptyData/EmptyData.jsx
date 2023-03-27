@@ -12,7 +12,7 @@ function EmptyData() {
         <LottieAni aniName={emptyCart} />
       </S.HeroIMG>
       <S.Button>
-        <Link to="/search">추가하러 가기</Link>
+        <Link to="/">추가하러 가기</Link>
       </S.Button>
     </S.Container>
   );

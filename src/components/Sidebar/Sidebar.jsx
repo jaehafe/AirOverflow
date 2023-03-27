@@ -67,7 +67,7 @@ function Sidebar({ isOpenLoginModal, setIsOpenLoginModal }) {
       {/*  */}
       <S.AsideMenu>
         <S.AsideMenuTitle>미세먼지 검색</S.AsideMenuTitle>
-        <S.AsideMenuSubtitle onClick={() => navigate('/search')}>
+        <S.AsideMenuSubtitle onClick={() => navigate('/')}>
           미세먼지 지도
         </S.AsideMenuSubtitle>
       </S.AsideMenu>

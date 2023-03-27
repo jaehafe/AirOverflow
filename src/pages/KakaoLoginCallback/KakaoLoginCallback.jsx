@@ -63,7 +63,7 @@ function KakaoLoginCallback() {
 
         message
           .success('로그인에 성공했습니다. 원을 클릭해서 즐겨찾기에 저장해보세요.')
-          .then(() => navigate('/search'));
+          .then(() => navigate('/'));
       }
     }
   }, [tokenData, tokenInfoData]);
