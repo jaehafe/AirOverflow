@@ -6,7 +6,6 @@ import DisplayStarredOnMap from '../../components/DisplayStarredOnMap/DisplaySta
 
 function Starred() {
   const [cookie] = useCookies(['airoverflow']);
-  // console.log('cookie.airoverflow?.userId', cookie?.airoverflow?.userId);
 
   const loggedInUserId = cookie?.airoverflow?.userId;
 
