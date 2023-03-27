@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setSidoName } from '../../redux/features/sidoSlice';
 
 import { useAddStarMutation, useDeleteStarMutation } from '../../redux/features/starred';
+import { Spin } from 'antd';
 
 function Search() {
   const dispatch = useDispatch();
@@ -42,7 +43,11 @@ function Search() {
   const [deleteStar, { isLoading: isDeleting }] = useDeleteStarMutation();
 
   if (stationLoading || APIsLoading || stationFetching || APIsFetching) {
-    return <div>isFetching ...</div>;
+    return (
+      <S.SpinContainer>
+        <Spin size="large" />
+      </S.SpinContainer>
+    );
   }
 
   if (stationErr) {

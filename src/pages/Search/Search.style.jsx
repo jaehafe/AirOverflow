@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 import { Select } from 'antd';
 
+export const SpinContainer = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const Container = styled.div`
   position: relative;
 `;
