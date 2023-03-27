@@ -70,10 +70,6 @@ function Sidebar({ isOpenLoginModal, setIsOpenLoginModal }) {
         <S.AsideMenuSubtitle onClick={() => navigate('/search')}>
           미세먼지 지도
         </S.AsideMenuSubtitle>
-        {/* <S.AsideMenuSubtitle>
-          IT 스킬 체크업
-          <S.StyledAiOutlineHome />
-        </S.AsideMenuSubtitle> */}
       </S.AsideMenu>
       {/*  */}
       <S.AsideMenu>
@@ -82,15 +78,7 @@ function Sidebar({ isOpenLoginModal, setIsOpenLoginModal }) {
           즐겨찾는 지역
         </S.AsideMenuSubtitle>
         {/* <S.AsideMenuSubtitle>
-          IT 스킬 체크업
-          <S.StyledAiOutlineHome />
-        </S.AsideMenuSubtitle> */}
-      </S.AsideMenu>
-      <S.AsideMenu>
-        <S.AsideMenuTitle>로그인</S.AsideMenuTitle>
-        <S.AsideMenuSubtitle>로그인</S.AsideMenuSubtitle>
-        {/* <S.AsideMenuSubtitle>
-          IT 스킬 체크업
+          123
           <S.StyledAiOutlineHome />
         </S.AsideMenuSubtitle> */}
       </S.AsideMenu>
