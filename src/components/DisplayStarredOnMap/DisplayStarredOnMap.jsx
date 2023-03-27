@@ -7,7 +7,8 @@ import EmptyData from '../EmptyData/EmptyData';
 
 const { kakao } = window;
 
-function DisplayStarredOnMap({ loggedInUserData }) {
+function DisplayStarredOnMap({ loggedInUserData: initialData }) {
+  const [loggedInUserData, setLoggedInUserData] = useState(initialData);
   const [deleteStar] = useDeleteStarMutation();
   const { asyncToast } = useAsyncToast();
 
@@ -16,6 +17,7 @@ function DisplayStarredOnMap({ loggedInUserData }) {
       mapscript();
     }
   }, [loggedInUserData]);
+  // console.log('loggedInUserData', loggedInUserData);
 
   // const stationNameArr = loggedInUserData.map((data) => data.value.data.stationName);
   // console.log('stationNameArr', stationNameArr);
@@ -29,8 +31,10 @@ function DisplayStarredOnMap({ loggedInUserData }) {
       error: () => `즐겨찾기 삭제를 실패했어요.`,
     };
     try {
+      // loggedInUserData.filter((data) => data.id !== target.id);
       const resultPromise = deleteStar(target.id).unwrap();
       asyncToast(resultPromise, target, messages);
+      setLoggedInUserData(loggedInUserData.filter((data) => data.id !== target.id));
     } catch (err) {
       console.log(err);
       throw err;
@@ -83,7 +87,6 @@ function DisplayStarredOnMap({ loggedInUserData }) {
   return (
     <>
       <ToastContainer />
-
       {loggedInUserData.length > 0 ? <S.MapContainer id="map" /> : <EmptyData />}
     </>
   );
