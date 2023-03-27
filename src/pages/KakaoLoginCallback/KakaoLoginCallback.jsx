@@ -33,9 +33,9 @@ function KakaoLoginCallback() {
   } = useGetUserTokenInfoQuery(tokenData?.access_token, {
     skip: !tokenData?.access_token,
   });
-  console.log('tokenData!!!!!!!!!!!!!!', tokenData);
+  // console.log('tokenData!!!!!!!!!!!!!!', tokenData);
   let code = new URL(window.location.href).searchParams.get('code');
-  console.log('code', code);
+  // console.log('code', code);
 
   useEffect(() => {
     if (code) {
@@ -50,7 +50,7 @@ function KakaoLoginCallback() {
     if (getTokenSuccess) {
       if (tokenData?.access_token) {
         const { access_token, id_token } = tokenData;
-        localStorage.setItem('access_token', JSON.stringify({ access_token, id_token }));
+        // localStorage.setItem('access_token', JSON.stringify({ access_token, id_token }));
         setCookie(
           'airoverflow',
           { access_token, userId },
@@ -61,9 +61,10 @@ function KakaoLoginCallback() {
           }
         );
 
-        message
-          .success('로그인에 성공했습니다. 원을 클릭해서 즐겨찾기에 저장해보세요.')
-          .then(() => navigate('/'));
+        // message
+        //   .success('로그인에 성공했습니다. 원을 클릭해서 즐겨찾기에 저장해보세요.')
+        //   .then(() => navigate('/'));
+        navigate('/');
       }
     }
   }, [tokenData, tokenInfoData]);

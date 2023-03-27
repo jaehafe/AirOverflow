@@ -3,6 +3,7 @@ import * as S from './LoginModal.style';
 import ReactDOM from 'react-dom';
 import { message } from 'antd';
 
+// `${import.meta.env.VITE_KAKAO_REDIRECT_URL}`
 const REDIRECT_URI = 'http://localhost:5173/KakaoLoginCallback';
 
 function LoginModal({ isOpenLoginModal, setIsOpenLoginModal }) {
