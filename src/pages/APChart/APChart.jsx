@@ -40,15 +40,19 @@ function APChart() {
 
   if (isLoadingStationData) {
     return (
-      <div>
+      <S.SpinContainer>
         <Spin size="large" />
-      </div>
+      </S.SpinContainer>
     );
   }
 
   const APitems = APData?.response?.body?.items;
   if (!APitems) {
-    return <div>Data is not ready</div>;
+    return (
+      <S.SpinContainer>
+        <Spin size="large" />
+      </S.SpinContainer>
+    );
   }
   const sidoStationName = APitems?.map((item) => item.stationName);
 

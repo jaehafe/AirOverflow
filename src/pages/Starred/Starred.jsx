@@ -7,7 +7,6 @@ import { Spin } from 'antd';
 
 function Starred() {
   const [cookies] = useCookies(['airoverflow']);
-
   const loggedInUserId = cookies?.airoverflow?.userId;
 
   const {
