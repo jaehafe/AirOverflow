@@ -21,7 +21,8 @@ export const starredApi = createApi({
         url: `/starred/${key}.json`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Starred'],
+
+      providesTags: ['Starred'],
     }),
 
     getStarOfCurrentLoggedInUser: builder.query({
@@ -29,7 +30,8 @@ export const starredApi = createApi({
         url: '/starred.json',
         method: 'GET',
       }),
-      invalidatesTags: ['Starred'],
+
+      providesTags: ['Starred'],
     }),
   }),
 });

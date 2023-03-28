@@ -3,6 +3,7 @@ import * as S from './Starred.style';
 import { useCookies } from 'react-cookie';
 import { useGetStarOfCurrentLoggedInUserQuery } from '../../redux/features/starred';
 import DisplayStarredOnMap from '../../components/DisplayStarredOnMap/DisplayStarredOnMap';
+import { Spin } from 'antd';
 
 function Starred() {
   const [cookies] = useCookies(['airoverflow']);
@@ -18,10 +19,11 @@ function Starred() {
 
   useEffect(() => {
     refetchStarred();
-  }, [starredData, loggedInUserId, refetchStarred]);
+    console.log('refecth!!!!!!!!!!!!!!');
+  }, [starredData]);
 
   if (isLoadingGetStarred) {
-    return <div>Loading...</div>;
+    return <Spin size="large" />;
   }
 
   if (isErrGetStarred) {

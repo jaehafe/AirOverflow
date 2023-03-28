@@ -17,7 +17,7 @@ function DisplayStarredOnMap({ loggedInUserData: initialData, refetchStarred }) 
     if (loggedInUserData.length > 0) {
       mapscript();
     }
-  }, [loggedInUserData]);
+  }, [loggedInUserData, refetchStarred]);
 
   const handleDeleteStar = (target) => {
     const messages = {
