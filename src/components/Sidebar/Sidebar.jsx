@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import LoginModal from '../LoginModal/LoginModal';
 import * as S from './Sidebar.style';
+import AsideMenu from '../AsideMenu/AsideMenu';
 
 import { message } from 'antd';
 import { useLogoutKakaoMutation } from '../../redux/features/kakaoLogin';
@@ -40,6 +41,27 @@ function Sidebar({ isOpenLoginModal, setIsOpenLoginModal }) {
     }
   };
 
+  const NavList = [
+    {
+      navigate: () => navigate('/'),
+      title: '미세먼지 검색',
+      subTitle: '미세먼지 지도',
+      balloon: '검색하기',
+    },
+    {
+      navigate: () => navigate('/starred'),
+      title: '즐겨찾기',
+      subTitle: '즐겨찾는 지역',
+      balloon: '회원전용',
+    },
+    {
+      navigate: () => navigate('/apchart'),
+      title: '차트',
+      subTitle: '미세먼지 현황',
+      balloon: '현황차트',
+    },
+  ];
+
   return (
     <S.Container>
       {isOpenLoginModal && <LoginModal setIsOpenLoginModal={setIsOpenLoginModal} />}
@@ -64,29 +86,38 @@ function Sidebar({ isOpenLoginModal, setIsOpenLoginModal }) {
       </S.AsideMemberWrapper>
 
       {/*  */}
-      <S.AsideMenu>
+      {/* <S.AsideMenu>
         <S.AsideMenuTitle>미세먼지 검색</S.AsideMenuTitle>
         <S.AsideMenuSubtitle onClick={() => navigate('/')}>
           미세먼지 지도
           <S.SearchBalloon>검색하기</S.SearchBalloon>
         </S.AsideMenuSubtitle>
-      </S.AsideMenu>
+      </S.AsideMenu> */}
       {/*  */}
-      <S.AsideMenu>
+      {/* <S.AsideMenu>
         <S.AsideMenuTitle>즐겨찾기</S.AsideMenuTitle>
         <S.AsideMenuSubtitle onClick={() => navigate('/starred')}>
           즐겨찾는 지역
           <S.StarredBalloon>회원전용</S.StarredBalloon>
         </S.AsideMenuSubtitle>
-      </S.AsideMenu>
+      </S.AsideMenu> */}
       {/*  */}
-      <S.AsideMenu>
+      {/* <S.AsideMenu>
         <S.AsideMenuTitle>차트</S.AsideMenuTitle>
         <S.AsideMenuSubtitle onClick={() => navigate('/apchart')}>
           미세먼지 현황
           <S.ChartBalloon>현황차트</S.ChartBalloon>
         </S.AsideMenuSubtitle>
-      </S.AsideMenu>
+      </S.AsideMenu> */}
+      {NavList.map((list) => (
+        <AsideMenu
+          key={list.title}
+          title={list.title}
+          subTitle={list.subTitle}
+          balloon={list.balloon}
+          navigate={list.navigate}
+        />
+      ))}
     </S.Container>
   );
 }
