@@ -1,19 +1,21 @@
 import React from 'react';
 import * as S from './EmptyData.style';
-import emptyCart from '../../assets/empty.json';
+import empty from '../../assets/empty.json';
 import LottieAni from '../lottieAni';
 import { Link } from 'react-router-dom';
 
-function EmptyData() {
+function EmptyData({ props }) {
   return (
     <S.Container>
-      <S.Title>즐겨찾기 데이터가 없네요</S.Title>
+      <S.Title>{props.title}</S.Title>
       <S.HeroIMG>
-        <LottieAni aniName={emptyCart} />
+        <LottieAni aniName={empty} />
       </S.HeroIMG>
-      <S.Button>
-        <Link to="/">추가하러 가기</Link>
-      </S.Button>
+      {props.navigate && (
+        <S.Button>
+          <Link to={props.navigate}>{props.navigateBtnTitle}</Link>
+        </S.Button>
+      )}
     </S.Container>
   );
 }

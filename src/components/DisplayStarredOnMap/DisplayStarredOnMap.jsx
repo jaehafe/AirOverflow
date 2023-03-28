@@ -4,6 +4,7 @@ import { colorByPM10Value } from '../../utils/mapUtils';
 import { useAsyncToast, ToastContainer } from '../../hooks/useToast';
 import { useDeleteStarMutation } from '../../redux/features/starred';
 import EmptyData from '../EmptyData/EmptyData';
+import { EmptyStarredProps } from '../../utils/EmptyDataUtils';
 
 const { kakao } = window;
 
@@ -87,7 +88,11 @@ function DisplayStarredOnMap({ loggedInUserData: initialData }) {
   return (
     <div>
       <ToastContainer />
-      {loggedInUserData.length > 0 ? <S.MapContainer id="map" /> : <EmptyData />}
+      {loggedInUserData.length > 0 ? (
+        <S.MapContainer id="map" />
+      ) : (
+        <EmptyData props={EmptyStarredProps} />
+      )}
     </div>
   );
 }

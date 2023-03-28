@@ -88,13 +88,3 @@ export const DataTermSelect = styled(Select)`
     }
   }
 `;
-
-export const ChartContainer = styled.div`
-  margin-top: 20px;
-  border: 1px solid;
-  /* min-height: 92vh; */
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;

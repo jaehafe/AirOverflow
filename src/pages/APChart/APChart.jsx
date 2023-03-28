@@ -1,4 +1,5 @@
 import React from 'react';
+import StationChart from '../../components/StationChart/StationChart';
 import {
   useGetAirPollutionQuery,
   useGetStationStatusQuery,
@@ -77,6 +78,7 @@ function APChart() {
       ...getDataTerm.map((term) => ({
         label: term.label,
         value: term.value,
+        disabled: term.value === '3MONTH',
       })),
     ];
   };
@@ -146,7 +148,7 @@ function APChart() {
           options={DataTermOptions()}
         />
       </S.SelectWrapper>
-      <S.ChartContainer>123</S.ChartContainer>
+      <StationChart stationDataItems={stationDataItems} />
     </S.Container>
   );
 }
