@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const SpinContainer = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const MapContainer = styled.div`
   width: 100vw;
   min-height: 100vh;

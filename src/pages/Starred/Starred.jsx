@@ -22,7 +22,11 @@ function Starred() {
   }, [starredData]);
 
   if (isLoadingGetStarred) {
-    return <Spin size="large" />;
+    return (
+      <S.SpinContainer>
+        <Spin size="large" />
+      </S.SpinContainer>
+    );
   }
 
   if (isErrGetStarred) {
