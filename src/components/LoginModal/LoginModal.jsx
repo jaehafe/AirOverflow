@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { message } from 'antd';
 
 // `${import.meta.env.VITE_KAKAO_REDIRECT_URL}`
-const REDIRECT_URI = 'http://localhost:5173/KakaoLoginCallback';
+const REDIRECT_URI = `${import.meta.env.VITE_KAKAO_REDIRECT_URL}`;
 
 function LoginModal({ isOpenLoginModal, setIsOpenLoginModal }) {
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${
