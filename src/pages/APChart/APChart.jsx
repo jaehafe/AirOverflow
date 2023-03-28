@@ -121,6 +121,9 @@ function APChart() {
     );
   };
 
+  const stationDataItems = stationData?.response?.body?.items;
+  console.log('stationDataItems', stationDataItems);
+
   return (
     <S.Container>
       <S.SelectWrapper>
