@@ -18,8 +18,14 @@ function DisplayDataOnMap({
   const { asyncToast } = useAsyncToast();
   const [mapInstance, setMapInstance] = useState(null);
   const userId = cookie?.airoverflow?.userId;
+  const access_token = cookie?.airoverflow?.access_token;
 
   const handleAddStar = (data) => {
+    if (!access_token) {
+      message.info('즐겨찾기 페이지는 로그인 후 이용이 가능합니다.');
+      return;
+    }
+
     const checkStationName = filteredStationName.find(
       (station) => station === data.stationName
     );
