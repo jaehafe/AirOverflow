@@ -8,6 +8,7 @@ import Search from './pages/Search/Search';
 import KakaoLoginCallback from './pages/KakaoLoginCallback/KakaoLoginCallback';
 import ProtectedRoute from './components/ProtectedRoute';
 import APChart from './pages/APChart/APChart';
+import NotFound from './components/NotFound';
 
 const SidebarLayout = () => {
   const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
@@ -22,6 +23,7 @@ const SidebarLayout = () => {
     </S.Wrapper>
   );
 };
+
 const HomeLayout = () => {
   return (
     <Home>
@@ -29,10 +31,12 @@ const HomeLayout = () => {
     </Home>
   );
 };
+
 const router = createBrowserRouter([
   {
     path: '/',
     element: <SidebarLayout />,
+    errorElement: <NotFound />,
     children: [
       {
         path: '/',
