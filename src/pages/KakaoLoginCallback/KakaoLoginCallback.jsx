@@ -32,9 +32,8 @@ function KakaoLoginCallback() {
     error: getTokenInfoError,
     isSuccess: getTokenInfoSuccess,
   } = useGetUserTokenInfoQuery(tokenData?.access_token);
-  console.log('tokenData!!!!!!!!!!!!!!', tokenData);
+
   let code = new URL(window.location.href).searchParams.get('code');
-  // console.log('code', code);
 
   useEffect(() => {
     if (code) {
@@ -46,9 +45,7 @@ function KakaoLoginCallback() {
     dispatch(setUserInfo(code));
   }, [code]);
 
-  console.log('tokenInfoData!!!!!!!!!!', tokenInfoData);
   const userId = tokenInfoData?.id;
-  console.log('userId!!!!!!!!!!!!!!', userId);
 
   useEffect(() => {
     if (getTokenSuccess && tokenData?.access_token && getTokenInfoSuccess) {
@@ -71,10 +68,6 @@ function KakaoLoginCallback() {
   }, [tokenData, tokenInfoData]);
 
   console.log('tokenInfoData', tokenInfoData);
-
-  // if (getTokenInfoSuccess) {
-  //   navigate('/');
-  // }
 
   if (getTokenError && getTokenInfoError) {
     message
