@@ -4,12 +4,12 @@ import ReactDOM from 'react-dom';
 import { message } from 'antd';
 
 // `${import.meta.env.VITE_KAKAO_REDIRECT_URL}`
-const REDIRECT_URI = `${import.meta.env.VITE_KAKAO_REDIRECT_URL}`;
+// const REDIRECT_URI = `${import.meta.env.VITE_KAKAO_REDIRECT_URL}`;
 
 function LoginModal({ isOpenLoginModal, setIsOpenLoginModal }) {
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${
     import.meta.env.VITE_KAKAO_REST_API_KEY
-  }&redirect_uri=${REDIRECT_URI}&response_type=code`;
+  }&redirect_uri=${import.meta.env.VITE_KAKAO_REDIRECT_URL}&response_type=code`;
 
   const handleKaokaoLogin = () => {
     window.location.href = KAKAO_AUTH_URL;

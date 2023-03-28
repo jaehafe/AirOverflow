@@ -19,10 +19,13 @@ function DisplayDataOnMap({
   const [mapInstance, setMapInstance] = useState(null);
   const userId = cookie?.airoverflow?.userId;
   const access_token = cookie?.airoverflow?.access_token;
+  console.log('access_token', access_token);
+  console.log('access_token', typeof access_token);
+  console.log('userId', userId);
 
   const handleAddStar = (data) => {
-    if (!access_token) {
-      message.info('즐겨찾기 페이지는 로그인 후 이용이 가능합니다.');
+    if (!access_token || access_token === undefined) {
+      message.info('즐겨찾기 추가 기능은 로그인 후 이용이 가능합니다.');
       return;
     }
 
