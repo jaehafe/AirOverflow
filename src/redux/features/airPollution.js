@@ -35,7 +35,26 @@ export const airPollutionApi = createApi({
         },
       }),
     }),
+
+    getStationStatus: builder.query({
+      query: (params) => ({
+        url: '/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty',
+        params: {
+          serviceKey: `${import.meta.env.VITE_AIR_POLLUTION_API_KEY}`,
+          returnType: 'json',
+          numOfRows: params.numOfRows,
+          pageNo: params.pageNo,
+          stationName: params.stationName,
+          dataTerm: params.dataTerm,
+          ver: '1.0',
+        },
+      }),
+    }),
   }),
 });
 
-export const { useGetAirPollutionQuery, useGetStationNameQuery } = airPollutionApi;
+export const {
+  useGetAirPollutionQuery,
+  useGetStationNameQuery,
+  useGetStationStatusQuery,
+} = airPollutionApi;

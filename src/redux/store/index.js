@@ -6,11 +6,13 @@ import { kakaoLoginApi } from '../features/kakaoLogin';
 
 import sidoReducer from '../features/sidoSlice';
 import userReducer from '../features/userSlice';
+import apDataReducer from '../features/apDataSlice';
 
 const store = configureStore({
   reducer: {
     sido: sidoReducer,
     userInfo: userReducer,
+    apData: apDataReducer,
     [airPollutionApi.reducerPath]: airPollutionApi.reducer,
     [starredApi.reducerPath]: starredApi.reducer,
     [kakaoLoginApi.reducerPath]: kakaoLoginApi.reducer,

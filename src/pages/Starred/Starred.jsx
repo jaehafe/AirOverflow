@@ -14,11 +14,11 @@ function Starred() {
     isLoading: isLoadingGetStarred,
     isError: isErrGetStarred,
     refetch: refetchStarred,
-  } = useGetStarOfCurrentLoggedInUserQuery({ refetchOnMountOrArgChange: false });
+  } = useGetStarOfCurrentLoggedInUserQuery({ refetchOnMountOrArgChange: true });
 
   useEffect(() => {
     refetchStarred();
-  }, [loggedInUserId, refetchStarred]);
+  }, [starredData, loggedInUserId, refetchStarred]);
 
   if (isLoadingGetStarred) {
     return <div>Loading...</div>;

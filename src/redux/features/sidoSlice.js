@@ -1,7 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  activeSido: { pageNo: 1, sidoName: '서울', numOfRows: 100, stationName: '' },
+  activeSido: {
+    pageNo: 1,
+    sidoName: '서울',
+    numOfRows: 100,
+    stationName: '',
+  },
 };
 
 const sidoSlice = createSlice({
@@ -9,8 +14,8 @@ const sidoSlice = createSlice({
   initialState,
   reducers: {
     setSidoName: (state, action) => {
-      state.activeSido.sidoName = action.payload.sidoName;
-      state.activeSido.stationName = action.payload.stationName;
+      state.activeSido.sidoName = action.payload?.sidoName;
+      state.activeSido.stationName = action.payload?.stationName;
     },
   },
 });
