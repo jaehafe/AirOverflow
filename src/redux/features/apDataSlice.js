@@ -4,8 +4,8 @@ const initialState = {
   activeStation: {
     pageNo: 1,
     numOfRows: 100,
-    stationName: '종로구',
-    dataTerm: 'DAILY',
+    stationName: '',
+    dataTerm: '',
   },
 };
 

@@ -17,7 +17,7 @@ function Sidebar({ isOpenLoginModal, setIsOpenLoginModal }) {
 
   const navigate = useNavigate();
 
-  console.log('cookie.airoverflow?.access_token->', cookie?.airoverflow?.access_token);
+  // console.log('cookie.airoverflow?.access_token->', cookie?.airoverflow?.access_token);
   const handleLogout = () => {
     const messages = {
       loading: '로그아웃 중...',
@@ -82,7 +82,7 @@ function Sidebar({ isOpenLoginModal, setIsOpenLoginModal }) {
         <S.AsideMenuTitle>차트</S.AsideMenuTitle>
         <S.AsideMenuSubtitle onClick={() => navigate('/apchart')}>
           미세먼지 현황
-          <S.StarredBalloon>차트</S.StarredBalloon>
+          <S.StarredBalloon>현황차트</S.StarredBalloon>
         </S.AsideMenuSubtitle>
       </S.AsideMenu>
     </S.Container>

@@ -39,3 +39,9 @@ export const getCurrentPositionAsync = () => {
     );
   });
 };
+
+export const getDataTerm = [
+  { label: '1일', value: 'DAILY' },
+  { label: '1개월', value: 'MONTH' },
+  { label: '3개월', value: '3MONTH' },
+];
