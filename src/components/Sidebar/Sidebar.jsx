@@ -80,7 +80,7 @@ function Sidebar({ isOpenLoginModal, setIsOpenLoginModal }) {
         <S.AsideMenuTitle>차트</S.AsideMenuTitle>
         <S.AsideMenuSubtitle onClick={() => navigate('/apchart')}>
           미세먼지 현황
-          <S.StarredBalloon>현황차트</S.StarredBalloon>
+          <S.ChartBalloon>현황차트</S.ChartBalloon>
         </S.AsideMenuSubtitle>
       </S.AsideMenu>
     </S.Container>

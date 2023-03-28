@@ -115,10 +115,13 @@ export const StyledBalloon = styled.div`
 `;
 
 export const SearchBalloon = styled(StyledBalloon)`
-  background-color: blue;
+  background-color: var(--primary);
 `;
 export const StarredBalloon = styled(SearchBalloon)`
   background-color: var(--secondary-yellow);
+`;
+export const ChartBalloon = styled(SearchBalloon)`
+  background-color: var(--category-pink);
 `;
 
 export const StyledAiOutlineHome = styled(AiOutlineHome)`
