@@ -25,9 +25,6 @@ function Sidebar({ isOpenLoginModal, setIsOpenLoginModal }) {
       error: () => '로그아웃 실패',
     };
 
-    // removeCookie('airoverflow', { path: '/' }, () => {
-    //   message.success('로그아웃 하였습니다.');
-    // });
     try {
       const logoutResult = logoutKakao(cookie?.airoverflow?.access_token).unwrap();
       console.log('logoutResult', logoutResult);
@@ -78,6 +75,14 @@ function Sidebar({ isOpenLoginModal, setIsOpenLoginModal }) {
         <S.AsideMenuSubtitle onClick={() => navigate('/starred')}>
           즐겨찾는 지역
           <S.StarredBalloon>회원전용</S.StarredBalloon>
+        </S.AsideMenuSubtitle>
+      </S.AsideMenu>
+      {/*  */}
+      <S.AsideMenu>
+        <S.AsideMenuTitle>차트</S.AsideMenuTitle>
+        <S.AsideMenuSubtitle onClick={() => navigate('/apchart')}>
+          미세먼지 현황
+          <S.StarredBalloon>차트</S.StarredBalloon>
         </S.AsideMenuSubtitle>
       </S.AsideMenu>
     </S.Container>

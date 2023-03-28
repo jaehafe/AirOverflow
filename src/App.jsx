@@ -7,6 +7,7 @@ import Starred from './pages/Starred/Starred';
 import Search from './pages/Search/Search';
 import KakaoLoginCallback from './pages/KakaoLoginCallback/KakaoLoginCallback';
 import ProtectedRoute from './components/ProtectedRoute';
+import APChart from './pages/APChart/APChart';
 
 const SidebarLayout = () => {
   const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
@@ -46,6 +47,8 @@ const router = createBrowserRouter([
               </ProtectedRoute>
             ),
           },
+          { path: '/apchart', element: <APChart /> },
+          // private으로 감싸야함
           { path: '/KakaoLoginCallback', element: <KakaoLoginCallback /> },
         ],
       },
