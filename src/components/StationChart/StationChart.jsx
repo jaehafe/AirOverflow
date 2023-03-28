@@ -12,7 +12,8 @@ import {
   LineController,
   BarController,
 } from 'chart.js';
-import { Chart } from 'react-chartjs-2';
+
+import { Chart, Line } from 'react-chartjs-2';
 import EmptyData from '../EmptyData/EmptyData';
 import { EmptyChartDataProps } from '../../utils/EmptyDataUtils';
 
@@ -28,10 +29,10 @@ ChartJS.register(
   BarController
 );
 
-function StationChart({ stationDataItems }) {
+function StationChart({ sortedDataItems }) {
   // const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
-  const labels = stationDataItems?.map((item) => {
+  const labels = sortedDataItems?.map((item) => {
     const dateTimeString = item.dataTime; // "2023-03-28 15:00"
     const [dateString, timeString] = dateTimeString.split(' '); // ["2023-03-28", "15:00"]
     const date = new Date(dateString);
@@ -43,26 +44,53 @@ function StationChart({ stationDataItems }) {
     labels,
     datasets: [
       {
-        label: '미세먼지',
+        label: '미세먼지(PM10) 농도',
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255, 99, 132, 1)',
         borderWidth: 1,
-        data: stationDataItems?.map((item) => item.pm10Value),
+        data: sortedDataItems?.map((item) => item.pm10Value),
       },
       {
-        label: 'KhaiGrade',
+        label: '초미세먼지(PM2.5) 농도',
         backgroundColor: 'rgba(54, 162, 235, 0.2)',
         borderColor: 'rgba(54, 162, 235, 1)',
         borderWidth: 1,
-        data: stationDataItems?.map((item) => item.khaiGrade),
+        data: sortedDataItems?.map((item) => item.pm25Value),
+        // type: 'line',
       },
     ],
   };
 
+  const options = {
+    responsive: true,
+    // plugins: {
+    //   legend: {
+    //     position: 'top',
+    //   },
+    //   title: {
+    //     display: false,
+    //   },
+    // },
+    plugins: {
+      title: {
+        display: true,
+        text: '미세먼지 현황',
+      },
+    },
+    scales: {
+      y: {
+        title: {
+          display: true,
+          text: '단위 ㎍/㎥',
+        },
+      },
+    },
+  };
+
   return (
     <S.Container>
-      {stationDataItems ? (
-        <Chart type="bar" data={data} />
+      {sortedDataItems.length > 0 ? (
+        <Chart type="bar" data={data} options={options} />
       ) : (
         <EmptyData props={EmptyChartDataProps} />
       )}

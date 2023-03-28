@@ -115,7 +115,10 @@ function APChart() {
   };
 
   const stationDataItems = stationData?.response?.body?.items;
-  console.log('stationDataItems', stationDataItems);
+  const sortedStationDataItems = stationDataItems
+    ?.slice()
+    .sort((a, b) => new Date(a.dataTime) - new Date(b.dataTime));
+  const sortedDataItems = sortedStationDataItems ?? [];
 
   return (
     <S.Container>
@@ -139,7 +142,7 @@ function APChart() {
           options={DataTermOptions()}
         />
       </S.SelectWrapper>
-      <StationChart stationDataItems={stationDataItems} />
+      <StationChart sortedDataItems={sortedDataItems} />
     </S.Container>
   );
 }
