@@ -39,4 +39,3 @@ export const {
   useDeleteStarMutation,
   useGetStarOfCurrentLoggedInUserQuery,
 } = starredApi;
-console.log('starredApi', starredApi);

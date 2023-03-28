@@ -68,7 +68,6 @@ function Search() {
   );
 
   const filteredStationName = loggedInUserData.map((data) => data.value.data.stationName);
-  console.log('filteredStationName', filteredStationName);
 
   ///////////////////
 

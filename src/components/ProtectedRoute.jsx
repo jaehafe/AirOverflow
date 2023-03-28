@@ -7,7 +7,6 @@ export default function ProtectedRoute({ children }) {
   const [cookie] = useCookies(['airoverflow']);
 
   const access_token = cookie?.airoverflow?.access_token;
-  console.log('access_token', cookie?.airoverflow?.access_token);
 
   useEffect(() => {
     if (!access_token) {

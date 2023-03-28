@@ -18,10 +18,6 @@ function DisplayStarredOnMap({ loggedInUserData: initialData }) {
       mapscript();
     }
   }, [loggedInUserData]);
-  // console.log('loggedInUserData', loggedInUserData);
-
-  // const stationNameArr = loggedInUserData.map((data) => data.value.data.stationName);
-  // console.log('stationNameArr', stationNameArr);
 
   const handleDeleteStar = (target) => {
     console.log('target', target);
