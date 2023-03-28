@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   activeStation: {
+    sidoName: '서울',
     pageNo: 1,
     numOfRows: 100,
     stationName: '종로구',

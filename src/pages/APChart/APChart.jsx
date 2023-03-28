@@ -33,9 +33,9 @@ function APChart() {
     isFetching: APIsFetching,
     isLoading: APIsLoading,
   } = useGetAirPollutionQuery({
-    pageNo: activeSido.pageNo, // 1
-    sidoName: activeSido.sidoName, // 서울
-    numOfRows: activeSido.numOfRows, // 100
+    pageNo: activeStation.pageNo, // 1
+    sidoName: activeStation.sidoName, // 서울
+    numOfRows: activeStation.numOfRows, // 100
   });
 
   if (isLoadingStationData) {
@@ -84,23 +84,14 @@ function APChart() {
   };
 
   const handleSidoChange = (selectedOption) => {
-    dispatch(
-      setSidoName({
-        ...activeSido,
-        sidoName: selectedOption,
-        stationName: '',
-      })
-    );
     // 다른 시/도 선택 시 activeStation초기화
     dispatch(
       setStationData({
         ...activeStation,
+        sidoName: selectedOption,
         stationName: '',
-        dataTerm: '',
       })
     );
-
-    console.log('activeStation', activeStation);
   };
 
   const handleStationName = (selectedOption) => {
