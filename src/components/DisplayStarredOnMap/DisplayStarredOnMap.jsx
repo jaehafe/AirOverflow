@@ -8,7 +8,7 @@ import { EmptyStarredProps } from '../../utils/EmptyDataUtils';
 
 const { kakao } = window;
 
-function DisplayStarredOnMap({ loggedInUserData: initialData }) {
+function DisplayStarredOnMap({ loggedInUserData: initialData, refetchStarred }) {
   const [loggedInUserData, setLoggedInUserData] = useState(initialData);
   const [deleteStar] = useDeleteStarMutation({ refetchOnMountOrArgChange: true });
   const { asyncToast } = useAsyncToast();
@@ -20,22 +20,21 @@ function DisplayStarredOnMap({ loggedInUserData: initialData }) {
   }, [loggedInUserData]);
 
   const handleDeleteStar = (target) => {
-    console.log('target', target);
-
     const messages = {
       loading: '삭제중...',
       success: (target) => `${target.value.data.stationName} 즐겨찾기 삭제 완료`,
       error: () => `즐겨찾기 삭제를 실패했어요.`,
     };
-    try {
-      // loggedInUserData.filter((data) => data.id !== target.id);
-      const resultPromise = deleteStar(target.id).unwrap();
-      asyncToast(resultPromise, target, messages);
-      setLoggedInUserData(loggedInUserData.filter((data) => data.id !== target.id));
-    } catch (err) {
-      console.log(err);
-      throw err;
-    }
+    // try {
+    // loggedInUserData.filter((data) => data.id !== target.id);
+    const resultPromise = deleteStar(target.id).unwrap();
+    asyncToast(resultPromise, target, messages);
+    setLoggedInUserData(loggedInUserData.filter((data) => data.id !== target.id));
+    refetchStarred();
+    // } catch (err) {
+    //   console.log(err);
+    //   throw err;
+    // }
   };
 
   // 맵 그려주는 함수

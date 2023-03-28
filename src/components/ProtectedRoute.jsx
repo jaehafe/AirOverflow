@@ -4,9 +4,9 @@ import { useCookies } from 'react-cookie';
 import { Navigate } from 'react-router-dom';
 
 export default function ProtectedRoute({ children }) {
-  const [cookie] = useCookies(['airoverflow']);
+  const [cookies] = useCookies(['airoverflow']);
 
-  const access_token = cookie?.airoverflow?.access_token;
+  const access_token = cookies?.airoverflow?.access_token;
 
   useEffect(() => {
     if (!access_token) {

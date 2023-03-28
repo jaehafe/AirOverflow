@@ -14,17 +14,15 @@ function DisplayDataOnMap({
   refetchStarred,
   filteredStationName,
 }) {
-  const [cookie] = useCookies(['airoverflow']);
+  const [cookies] = useCookies(['airoverflow']);
   const { asyncToast } = useAsyncToast();
   const [mapInstance, setMapInstance] = useState(null);
-  const userId = cookie?.airoverflow?.userId;
-  const access_token = cookie?.airoverflow?.access_token;
-  console.log('access_token', access_token);
-  console.log('access_token', typeof access_token);
-  console.log('userId', userId);
+  const userId = cookies?.airoverflow?.userId;
 
   const handleAddStar = (data) => {
-    if (!access_token || access_token === undefined) {
+    const access_token = cookies?.airoverflow?.access_token;
+
+    if (!access_token) {
       message.info('즐겨찾기 추가 기능은 로그인 후 이용이 가능합니다.');
       return;
     }
@@ -43,14 +41,15 @@ function DisplayDataOnMap({
       error: () => `즐겨찾기를 실패했어요.`,
     };
 
-    try {
-      const resultPromise = addStar({ data, userId }).unwrap();
-      asyncToast(resultPromise, data, messages);
-      refetchStarred();
-    } catch (err) {
-      console.log(err);
-      throw err;
-    }
+    const resultPromise = addStar({ data, userId }).unwrap();
+    asyncToast(resultPromise, data, messages);
+    refetchStarred();
+    // try {
+
+    // } catch (err) {
+    //   console.log(err);
+    //   throw err;
+    // }
   };
 
   const stationDataItems = stationData?.response?.body?.items;

@@ -18,7 +18,7 @@ import { Spin } from 'antd';
 import { useCookies } from 'react-cookie';
 
 function Search() {
-  const [cookie] = useCookies(['airoverflow']);
+  const [cookies] = useCookies(['airoverflow']);
   const dispatch = useDispatch();
   const { activeSido } = useSelector((state) => state.sido);
   // console.log('activeSido', activeSido);
@@ -55,7 +55,7 @@ function Search() {
   const [addStar, { isLoading: isAdding }] = useAddStarMutation();
   const [deleteStar, { isLoading: isDeleting }] = useDeleteStarMutation();
 
-  const loggedInUserId = cookie?.airoverflow?.userId;
+  const loggedInUserId = cookies?.airoverflow?.userId;
 
   ////////////////////
   const starredDataEntries = starredData ? Object.entries(starredData) : [];

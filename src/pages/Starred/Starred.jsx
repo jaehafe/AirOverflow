@@ -5,9 +5,9 @@ import { useGetStarOfCurrentLoggedInUserQuery } from '../../redux/features/starr
 import DisplayStarredOnMap from '../../components/DisplayStarredOnMap/DisplayStarredOnMap';
 
 function Starred() {
-  const [cookie] = useCookies(['airoverflow']);
+  const [cookies] = useCookies(['airoverflow']);
 
-  const loggedInUserId = cookie?.airoverflow?.userId;
+  const loggedInUserId = cookies?.airoverflow?.userId;
 
   const {
     data: starredData,
@@ -39,7 +39,10 @@ function Starred() {
 
   return (
     <>
-      <DisplayStarredOnMap loggedInUserData={loggedInUserData} />
+      <DisplayStarredOnMap
+        loggedInUserData={loggedInUserData}
+        refetchStarred={refetchStarred}
+      />
     </>
   );
 }

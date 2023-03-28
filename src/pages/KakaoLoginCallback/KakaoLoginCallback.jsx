@@ -30,6 +30,7 @@ function KakaoLoginCallback() {
     data: tokenInfoData,
     isLoading: getTokenInfoLoading,
     error: getTokenInfoError,
+    isSuccess: getTokenInfoSuccess,
   } = useGetUserTokenInfoQuery(tokenData?.access_token);
   console.log('tokenData!!!!!!!!!!!!!!', tokenData);
   let code = new URL(window.location.href).searchParams.get('code');
@@ -50,7 +51,7 @@ function KakaoLoginCallback() {
   console.log('userId!!!!!!!!!!!!!!', userId);
 
   useEffect(() => {
-    if (getTokenSuccess && tokenData?.access_token) {
+    if (getTokenSuccess && tokenData?.access_token && getTokenInfoSuccess) {
       const { access_token } = tokenData;
       setCookie(
         'airoverflow',
@@ -61,21 +62,25 @@ function KakaoLoginCallback() {
           secure: true,
         }
       );
-      message
-        .success('로그인에 성공했습니다. 원을 클릭해서 즐겨찾기에 저장해보세요.')
-        .then(() => navigate('/'));
+      navigate('/');
+      // message
+      //   .success('로그인에 성공했습니다. 원을 클릭해서 즐겨찾기에 저장해보세요.')
+      //   .then(() => navigate('/'));
+      // navigate('/');
     }
   }, [tokenData, tokenInfoData]);
 
   console.log('tokenInfoData', tokenInfoData);
 
-  // useEffect(() => {
-  if (getTokenError || getTokenInfoError) {
+  // if (getTokenInfoSuccess) {
+  //   navigate('/');
+  // }
+
+  if (getTokenError && getTokenInfoError) {
     message
       .error('로그인에 문제가 발생했습니다.\n잠시 후 다시 시도해 주세요 :(')
       .then(() => navigate('/'));
   }
-  // });
 
   if (getTokenInfoLoading) {
     return <div>토큰 정보 받는중</div>;

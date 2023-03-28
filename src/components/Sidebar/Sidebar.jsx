@@ -11,8 +11,7 @@ import { useAsyncToast } from '../../hooks/useToast';
 function Sidebar({ isOpenLoginModal, setIsOpenLoginModal }) {
   const { asyncToast } = useAsyncToast();
   const [logoutKakao, { isLoading: isLoadingKakaoLogout }] = useLogoutKakaoMutation();
-  const [cookie] = useCookies(['airoverflow']);
-  const [, , removeCookie] = useCookies(['airoverflow']);
+  const [cookies, setCookies, removeCookie] = useCookies(['airoverflow']);
 
   const navigate = useNavigate();
 
@@ -24,15 +23,20 @@ function Sidebar({ isOpenLoginModal, setIsOpenLoginModal }) {
     };
 
     try {
-      const logoutResult = logoutKakao(cookie?.airoverflow?.access_token).unwrap();
+      const logoutResult = logoutKakao(cookies?.airoverflow?.access_token).unwrap();
       console.log('logoutResult', logoutResult);
 
       asyncToast(logoutResult, null, messages);
+      removeCookie('airoverflow', {
+        path: '/',
+        sameSite: 'strict',
+        secure: true,
+      });
+      window.location.reload();
+      // navigate('/apchart');
     } catch (err) {
       console.log(err);
       throw err;
-    } finally {
-      removeCookie('airoverflow');
     }
   };
 
@@ -50,7 +54,7 @@ function Sidebar({ isOpenLoginModal, setIsOpenLoginModal }) {
       </S.AsideLogo>
       {/*  */}
       <S.AsideMemberWrapper>
-        {cookie.airoverflow?.access_token ? (
+        {cookies.airoverflow?.access_token ? (
           <S.AsideLogout onClick={handleLogout}>로그아웃 하기</S.AsideLogout>
         ) : (
           <S.AsideLogin onClick={() => setIsOpenLoginModal(true)}>
