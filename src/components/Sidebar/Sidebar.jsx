@@ -13,11 +13,9 @@ function Sidebar({ isOpenLoginModal, setIsOpenLoginModal }) {
   const [logoutKakao, { isLoading: isLoadingKakaoLogout }] = useLogoutKakaoMutation();
   const [cookie] = useCookies(['airoverflow']);
   const [, , removeCookie] = useCookies(['airoverflow']);
-  // console.log('airoverflow cookie', cookie);
 
   const navigate = useNavigate();
 
-  // console.log('cookie.airoverflow?.access_token->', cookie?.airoverflow?.access_token);
   const handleLogout = () => {
     const messages = {
       loading: '로그아웃 중...',

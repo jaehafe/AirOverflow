@@ -46,8 +46,6 @@ function APChart() {
     );
   }
 
-  console.log('stationData', stationData);
-
   const APitems = APData?.response?.body?.items;
   if (!APitems) {
     return <div>Data is not ready</div>;

@@ -33,8 +33,6 @@ function DisplayDataOnMap({
       message.info(`'${data.stationName}'은/는 이미 즐겨찾기에 저장하였습니다.`);
       return;
     }
-    console.log(checkStationName);
-    console.log('data!!!', data);
 
     const messages = {
       loading: '저장중...',
