@@ -21,6 +21,15 @@ function Starred() {
     console.log('refecth!!!!!!!!!!!!!!');
   }, [starredData]);
 
+  const starredDataEntries = starredData ? Object.entries(starredData) : [];
+  const allStarredDataArr = starredDataEntries.map(([key, value]) => {
+    return { id: key, value };
+  });
+
+  const loggedInUserData = allStarredDataArr.filter(
+    (data) => data.value.userId === loggedInUserId
+  );
+
   if (isLoadingGetStarred) {
     return (
       <S.SpinContainer>
@@ -33,22 +42,11 @@ function Starred() {
     return <div>Error loading starred data.</div>;
   }
 
-  const starredDataEntries = starredData ? Object.entries(starredData) : [];
-  const allStarredDataArr = starredDataEntries.map(([key, value]) => {
-    return { id: key, value };
-  });
-
-  const loggedInUserData = allStarredDataArr.filter(
-    (data) => data.value.userId === loggedInUserId
-  );
-
   return (
-    <>
-      <DisplayStarredOnMap
-        loggedInUserData={loggedInUserData}
-        refetchStarred={refetchStarred}
-      />
-    </>
+    <DisplayStarredOnMap
+      loggedInUserData={loggedInUserData}
+      refetchStarred={refetchStarred}
+    />
   );
 }
 
