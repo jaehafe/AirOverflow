@@ -53,7 +53,7 @@ function Search() {
   } = useGetStarOfCurrentLoggedInUserQuery({ refetchOnMountOrArgChange: true });
 
   const [addStar, { isLoading: isAdding }] = useAddStarMutation();
-  const [deleteStar, { isLoading: isDeleting }] = useDeleteStarMutation();
+  // const [deleteStar, { isLoading: isDeleting }] = useDeleteStarMutation();
 
   const loggedInUserId = cookies?.airoverflow?.userId;
 

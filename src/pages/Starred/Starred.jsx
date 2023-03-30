@@ -19,7 +19,7 @@ function Starred() {
   useEffect(() => {
     refetchStarred();
     console.log('refecth!!!!!!!!!!!!!!');
-  }, [starredData]);
+  }, []);
 
   const starredDataEntries = starredData ? Object.entries(starredData) : [];
   const allStarredDataArr = starredDataEntries.map(([key, value]) => {
