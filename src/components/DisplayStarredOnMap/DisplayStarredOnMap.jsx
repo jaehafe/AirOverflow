@@ -25,16 +25,12 @@ function DisplayStarredOnMap({ loggedInUserData: initialData, refetchStarred }) 
       success: (target) => `${target.value.data.stationName} 즐겨찾기 삭제 완료`,
       error: () => `즐겨찾기 삭제를 실패했어요.`,
     };
-    // try {
-    // loggedInUserData.filter((data) => data.id !== target.id);
-    const resultPromise = deleteStar(target.id).unwrap();
+
+    const resultPromise = deleteStar(target.id)
+      .unwrap()
+      .then(() => refetchStarred());
     asyncToast(resultPromise, target, messages);
     setLoggedInUserData(loggedInUserData.filter((data) => data.id !== target.id));
-    refetchStarred();
-    // } catch (err) {
-    //   console.log(err);
-    //   throw err;
-    // }
   };
 
   // 맵 그려주는 함수
