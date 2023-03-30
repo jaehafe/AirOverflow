@@ -17,7 +17,6 @@ function LoginModal({ isOpenLoginModal, setIsOpenLoginModal }) {
 
   const handleGithubLogin = () => {
     message.info('서비스 준비중입니다.');
-    console.log('123');
   };
 
   return ReactDOM.createPortal(

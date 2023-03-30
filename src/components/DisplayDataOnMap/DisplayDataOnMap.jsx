@@ -56,8 +56,7 @@ function DisplayDataOnMap({
       const foundAPitem = APDataItems?.find(
         (APitem) => APitem.stationName === stationItem.stationName
       );
-      // console.log('foundAPitem', foundAPitem);
-      // console.log('stationItem', stationItem);
+
       if (foundAPitem) {
         acc.push({
           sidoName: foundAPitem.sidoName,
@@ -75,8 +74,6 @@ function DisplayDataOnMap({
   }
 
   const mergedData = mergeData(stationDataItems, APDataItems);
-  // console.log('mergedData', mergedData);
-  // console.log('APDataItems', APDataItems);
 
   /////////////////////////////////////////
 
@@ -156,11 +153,6 @@ function DisplayDataOnMap({
       });
 
       customOverlay.setMap(map);
-
-      kakao.maps.event.addListener(customOverlay, 'click', () => {
-        console.log('123');
-        // 마커 위에 인포윈도우를 표시합니다
-      });
     });
   };
 

@@ -21,7 +21,7 @@ function Search() {
   const [cookies] = useCookies(['airoverflow']);
   const dispatch = useDispatch();
   const { activeSido } = useSelector((state) => state.sido);
-  // console.log('activeSido', activeSido);
+
   const {
     data: APData,
     error: APErr,
@@ -102,7 +102,6 @@ function Search() {
   };
 
   const handleStationName = (selectedOption) => {
-    console.log(selectedOption);
     dispatch(
       setSidoName({
         ...activeSido,

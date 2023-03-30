@@ -16,5 +16,4 @@ const userSlice = createSlice({
 
 export const { setUserInfo } = userSlice.actions;
 
-// console.log('userSlice', userSlice.state.activeUser);
 export default userSlice.reducer;

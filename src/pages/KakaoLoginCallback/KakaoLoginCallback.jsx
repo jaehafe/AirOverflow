@@ -14,7 +14,7 @@ function KakaoLoginCallback() {
   const [, setCookie] = useCookies();
   const navigate = useNavigate();
   const { activeUser } = useSelector((state) => state.userInfo);
-  console.log('activeUser', activeUser);
+
   const dispatch = useDispatch();
 
   const [
@@ -66,8 +66,6 @@ function KakaoLoginCallback() {
       // navigate('/');
     }
   }, [tokenData, tokenInfoData]);
-
-  console.log('tokenInfoData', tokenInfoData);
 
   if (getTokenError && getTokenInfoError) {
     message

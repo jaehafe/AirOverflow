@@ -26,7 +26,6 @@ function APChart() {
     dataTerm: activeStation.dataTerm,
   });
 
-  // console.log('activeSido', activeSido);
   const {
     data: APData,
     error: APErr,
@@ -97,7 +96,6 @@ function APChart() {
   };
 
   const handleStationName = (selectedOption) => {
-    console.log(selectedOption);
     dispatch(
       setStationData({
         ...activeStation,
@@ -107,7 +105,6 @@ function APChart() {
   };
 
   const handleStationData = (selectedOption) => {
-    console.log(selectedOption);
     dispatch(
       setStationData({
         ...activeStation,
