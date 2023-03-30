@@ -41,15 +41,10 @@ function DisplayDataOnMap({
       error: () => `즐겨찾기를 실패했어요.`,
     };
 
-    const resultPromise = addStar({ data, userId }).unwrap();
+    const resultPromise = addStar({ data, userId })
+      .unwrap()
+      .then(() => refetchStarred());
     asyncToast(resultPromise, data, messages);
-    refetchStarred();
-    // try {
-
-    // } catch (err) {
-    //   console.log(err);
-    //   throw err;
-    // }
   };
 
   const stationDataItems = stationData?.response?.body?.items;
