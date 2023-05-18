@@ -46,4 +46,4 @@
     - 비동기 알림을 컴포넌트로 만들어서 재사용성 고려
 
 ### 문제 해결 및 프로젝트 회고
-https://app.gitbook.com/o/VIET5ntJgbtvra81Psat/s/bYcvv7IylJ9jaNhqGBno/undefined-3/undefined/undefined
+https://adam-37.gitbook.io/joomadeung/undefined-3/undefined/undefined
