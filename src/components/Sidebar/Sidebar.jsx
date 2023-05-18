@@ -79,36 +79,10 @@ function Sidebar({ isOpenLoginModal, setIsOpenLoginModal }) {
         {cookies.airoverflow?.access_token ? (
           <S.AsideLogout onClick={handleLogout}>로그아웃 하기</S.AsideLogout>
         ) : (
-          <S.AsideLogin onClick={() => setIsOpenLoginModal(true)}>
-            로그인 하기
-          </S.AsideLogin>
+          <S.AsideLogin onClick={() => setIsOpenLoginModal(true)}>로그인 하기</S.AsideLogin>
         )}
       </S.AsideMemberWrapper>
 
-      {/*  */}
-      {/* <S.AsideMenu>
-        <S.AsideMenuTitle>미세먼지 검색</S.AsideMenuTitle>
-        <S.AsideMenuSubtitle onClick={() => navigate('/')}>
-          미세먼지 지도
-          <S.SearchBalloon>검색하기</S.SearchBalloon>
-        </S.AsideMenuSubtitle>
-      </S.AsideMenu> */}
-      {/*  */}
-      {/* <S.AsideMenu>
-        <S.AsideMenuTitle>즐겨찾기</S.AsideMenuTitle>
-        <S.AsideMenuSubtitle onClick={() => navigate('/starred')}>
-          즐겨찾는 지역
-          <S.StarredBalloon>회원전용</S.StarredBalloon>
-        </S.AsideMenuSubtitle>
-      </S.AsideMenu> */}
-      {/*  */}
-      {/* <S.AsideMenu>
-        <S.AsideMenuTitle>차트</S.AsideMenuTitle>
-        <S.AsideMenuSubtitle onClick={() => navigate('/apchart')}>
-          미세먼지 현황
-          <S.ChartBalloon>현황차트</S.ChartBalloon>
-        </S.AsideMenuSubtitle>
-      </S.AsideMenu> */}
       {NavList.map((list) => (
         <AsideMenu
           key={list.title}
